@@ -1,0 +1,93 @@
+Software Engineer (Mid Level)
+Sydney, New South Wales, Australia · Reposted 5 days ago · Over 100 applicants
+Promoted by hirer · No response insights available yet
+
+ Hybrid
+Matches your job preferences, workplace type is Hybrid.
+
+ Full-time
+Matches your job preferences, job type is Full-time.
+
+Easy Apply
+
+Save
+Save Software Engineer (Mid Level) at Lendi Group
+
+Your AI-powered job assessment
+
+
+Show match details
+
+Tailor my resume
+
+Create cover letter
+
+Help me stand out
+
+People you can reach out to
+ Zexi profile photo
+Zexi profile photo
+Zexi Deng
+
+· 3rd
+software engineer
+Recently hired
+
+Message
+About the job
+Company Description
+
+Lendi Group is a market-leading digital platform business focused on transforming the home loan industry. It operates the country’s #1 retail mortgage broker – the iconic Aussie Home Loans franchise – and the Australia’s #1 digital mortgage brand, Lendi.
+
+Together, with its national network of 1,300 brokers and 230 retail stores, the Lendi Group brands give all Australians the power of choice, and confidence, in one of life’s biggest financial decisions.
+
+Building on this market-leading foundation, Lendi Groups vision is to be the undisputed place for Australians to buy and own property through our new Aussie Homes propositions.
+
+Lendi Group’s loan book is more than $100b and it was named Australia’s Aggregator of the Year for 2024
+
+Diversity, Equality, and Inclusion are fundamental to the success of Lendi Group. We’re passionate about fostering an environment where our team members feel valued and supported and we celebrate everyone’s unique identity.
+
+To learn more about life at Lendi Group check out our blog: https://www.lendi.com.au/inspire/category/life-at-lendi/
+
+What’s the role?
+
+We are seeking a Sydney-based Software Engineer to join our Policy team – the primary entry point for customer acquisition and the sales tools used by brokers across the Aussie and Lendi businesses. This team owns and optimises key areas of our broker tooling and lender products, including deal building, customer assessments, credit scoring, servicing calculators, and automated application condition checks.
+
+Job Description
+
+Play an integral part in influencing the engineering team’s rhythm, culture and processes which could positively impact architecture and design, coding, deployment, and support.
+Be part of a team that is responsible for integral parts of the system, designing and delivering robust and scalable solutions.
+Own the code you and your team build, which means supporting debugging and monitoring in production.
+Write clean, maintainable code that is suitable for continuous integration and deployment.
+Work with our Product/UX team to imagine the visual and interaction patterns appropriate for our customers.
+Grow your product, technical, and soft skills as part of the Policy cross-functional team.
+Help us continuously improve the team’s ways of working and processes.
+
+
+Qualifications
+
+4-5 yrs experience working either in a full-stack capacity or as a back-end specialist with some experience or exposure to front-end and/or operations.
+Experience with automated testing, in legacy code and/or greenfield scenarios.
+Have delivered self-testing code, to production using a language such as Kotlin, Java, Scala, Python.
+Previous experience, or interest in, building message or event driven systems (Kafka), and web APIs (HTTP/REST/Graph QL).
+Previous experience, or interest in, working in a collaborative environment where you developed understanding of both business and technical domains, perhaps with collaborative modelling/design, BDD, DDD or similar approach.
+Exposure to, or hands-on experience using, AI-powered tools (such as code assistants, chatbots, or productivity apps) to support and enhance engineering tasks.
+
+
+Additional Information
+
+Lendi Group teams operate across Australia and the Philippines. We’re committed to creating a new era of seamless connection in property finance by changing the way Australians experience property lending, for good.
+
+A few of the benefits that our people rave about include:
+
+A vibrant, relaxed, yet professional culture
+Holistic wellbeing programs offering 24/7 support, including medical, mental health, and financial wellbeing services to enable our workforce to thrive at home and work
+Generous Paid Parental Leave: we celebrate our growing Lendi Group family with 18-26 weeks leave for primary carers and up to 4 weeks for secondary carers
+An additional week’s Loyalty Leave each year after reaching 3 years of service
+Wellness initiatives with a strong focus on psychological safety
+Social groups such as our industry-leading Women in Technology group.
+
+
+Our culture is guided by our 3 core values: We Are Stronger United; Act Like You Own It; and Keep Home Loans Human. Our values are part of our core DNA that helps Lendi Group to attract, engage and evolve the right talent and build best-in-class products.
+
+Feeling like you don’t meet all the skills listed? That’s ok; we are always on the lookout for different skills, experience, and qualities and so we’d still like to hear from you.
