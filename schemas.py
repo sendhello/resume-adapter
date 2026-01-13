@@ -36,6 +36,7 @@ class Resume(BaseModel):
     skills: dict[str, List[str]]
     career_history: List[CareerHistory]
     education: List[Education]
+    certificates: List[Education]
     websites: dict[str, str]
     languages: List[str]
     hobbies_interests: List[str]

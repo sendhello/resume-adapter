@@ -4,10 +4,10 @@ import logging
 from openai import AsyncOpenAI, OpenAIError, PermissionDeniedError
 
 from core.settings import settings
-from gateways.prompts import BASE_INFORMATION, ADAPTING_RESUME, TSS482_ADAPTING
+from gateways.prompts import BASE_INFORMATION, ADAPTING_RESUME, TSS482_ADAPTING, AU_RESUME, AU_COVER_LETTER
 from schemas import Resume, ResumeType
 import orjson
-from schemas import ResumeResponse
+from schemas import ResumeResponse, Resume
 from openai.types.shared.chat_model import ChatModel
 
 
@@ -27,7 +27,7 @@ class AIClient:
         )
         self.use_cache = use_cache
 
-    async def _chat_asc(self, prompt: str, text: str, model: ChatModel) -> dict | None:
+    async def _chat_asc(self, prompt: str, text: str, model: ChatModel) -> str | None:
         """Асинхронный метод для отправки запроса к OpenAI API и получения ответа.
         """
         if self.use_cache:
@@ -71,17 +71,50 @@ class AIClient:
 
         return result
 
-    async def adaptating_resume(self, vacansy_text: str, model: ChatModel = settings.ai_model, resume_type: ResumeType = ResumeType.SoftwareEngineer) -> tuple[Resume, str] | None:
+    async def adaptating_resume(
+            self,
+            vacanсy_text: str,
+            addition_text: str,
+            model: ChatModel = settings.ai_model,
+            resume_type: ResumeType = ResumeType.SoftwareEngineer
+    ) -> Resume:
         """Adopting resume to the given language."""
 
         with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
-            base_resume = "My basic resume: " + f.read()
-            visa_adapt = TSS482_ADAPTING if ResumeType.SoftwareEngineer else ""
-            prompt = ADAPTING_RESUME + visa_adapt + BASE_INFORMATION + base_resume
+            base_resume = "My basic resume data: " + f.read()
 
-        answer = await self._chat_asc(prompt=prompt, text=vacansy_text, model=model)
-        response = ResumeResponse.model_validate_json(answer)
-        return response.resume, response.cover_letter
+            additional_data = ''
+            if addition_text.strip():
+                additional_data = "Additional information for the resume: " + addition_text
+
+            visa_adapt = TSS482_ADAPTING if ResumeType.SoftwareEngineer else ""
+            prompt = AU_RESUME + visa_adapt + BASE_INFORMATION + base_resume + additional_data
+
+        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        resume = Resume.model_validate_json(answer)
+        return resume
+
+    async def adaptating_cover_letter(
+            self,
+            vacanсy_text: str,
+            addition_text: str,
+            model: ChatModel = settings.ai_model,
+            resume_type: ResumeType = ResumeType.SoftwareEngineer
+    ) -> str:
+        """Adopting resume to the given language."""
+
+        with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
+            base_resume = "My basic resume data: " + f.read()
+
+            additional_data = ''
+            if addition_text.strip():
+                additional_data = "Additional information for the resume: " + addition_text
+
+            visa_adapt = TSS482_ADAPTING if ResumeType.SoftwareEngineer else ""
+            prompt = AU_COVER_LETTER + visa_adapt + BASE_INFORMATION + base_resume + additional_data
+
+        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        return json.loads(answer)['cover_letter']
 
 
 def get_ai_client(use_cache: bool = False) -> AIClient:

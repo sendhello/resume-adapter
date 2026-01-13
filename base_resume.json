@@ -4,7 +4,7 @@
   "title": "Python Backend Engineer",
   "phone": "0466284180",
   "email": "bazhenov.in@gmail.com",
-  "address": "Kensington, VIC 3031",
+  "address": "VIC",
   "personal_summary": "Python backend engineer with 7+ years specialising in microservices with experience across FastAPI/Django, event-driven architectures (RabbitMQ/Kafka), and data-intensive systems (PostgreSQL, ClickHouse, Redis). Comfortable designing, building and operating low-latency, highly available, observable services in Docker/Kubernetes with GitLab CI/CD. Practical exposure to AWS (EC2, IAM, S3, RDS, VPC) and modern data tooling (Airflow, dbt, ETL, Elasticsearch/OpenSearch). Looking to contribute to an Australian product engineering team and help scale reliable, measurable backend platforms.",
   "skills": {
     "Languages & APIs": [
@@ -154,6 +154,14 @@
       "qualification": "Masters of Information Technology"
     },
     {
+      "institution": "Ulyanovsk Pedagogical College 4",
+      "location": "Russia",
+      "dates": "June 2008",
+      "qualification": "Diploma Informatics"
+    }
+  ],
+  "certificates": [
+    {
       "institution": "ILSC Education Group",
       "location": "Melbourne, VIC",
       "dates": "July 2025",
@@ -188,16 +196,10 @@
       "location": "Online",
       "dates": "May 2017",
       "qualification": "Python: Basics and Application"
-    },
-    {
-      "institution": "Ulyanovsk Pedagogical College 4",
-      "location": "Russia",
-      "dates": "June 2008",
-      "qualification": "Diploma Informatics"
     }
   ],
   "websites": {
-    "LinkedIn": "https://www.linkedin.com/in/sendhello",
+    "LinkedIn": "https://linkedin.com/in/sendhello",
     "GitHub": "https://github.com/sendhello"
   },
   "languages": [
