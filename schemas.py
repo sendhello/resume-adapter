@@ -17,12 +17,12 @@ class Education(BaseModel):
     qualification: str
 
 
-class CareerHistory(BaseModel):
+class Experience(BaseModel):
     position: str
     company: str
     location: str
     dates: str
-    responsibilities: List[str]
+    achievements: list[str]
 
 
 class Resume(BaseModel):
@@ -31,18 +31,14 @@ class Resume(BaseModel):
     title: str
     phone: str
     email: str
+    linkedin: str
+    github: str
     address: str
-    personal_summary: str
-    skills: dict[str, List[str]]
-    career_history: List[CareerHistory]
-    education: List[Education]
-    certificates: List[Education]
-    websites: dict[str, str]
-    languages: List[str]
-    hobbies_interests: List[str]
+    professional_summary: str
+    key_skills: dict[str, list[str]]
+    work_experience: list[Experience]
+    education: list[Education]
+    other_educations: list[Education]
+    languages: list[str]
+    hobbies: list[str]
     work_rights: str
-
-
-class ResumeResponse(BaseModel):
-    resume: Resume
-    cover_letter: str

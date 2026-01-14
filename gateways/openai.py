@@ -7,7 +7,7 @@ from core.settings import settings
 from gateways.prompts import BASE_INFORMATION, ADAPTING_RESUME, TSS482_ADAPTING, AU_RESUME, AU_COVER_LETTER
 from schemas import Resume, ResumeType
 import orjson
-from schemas import ResumeResponse, Resume
+from schemas import Resume
 from openai.types.shared.chat_model import ChatModel
 
 
@@ -80,18 +80,26 @@ class AIClient:
     ) -> Resume:
         """Adopting resume to the given language."""
 
+        print("Request resume adaptation")
         with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
-            base_resume = "My basic resume data: " + f.read()
+            base_resume = Resume.model_validate_json(f.read())
+            base_resume_text = "My basic resume data: " + base_resume.model_dump_json()
 
             additional_data = ''
             if addition_text.strip():
                 additional_data = "Additional information for the resume: " + addition_text
 
             visa_adapt = TSS482_ADAPTING if ResumeType.SoftwareEngineer else ""
-            prompt = AU_RESUME + visa_adapt + BASE_INFORMATION + base_resume + additional_data
+            prompt = AU_RESUME + visa_adapt + BASE_INFORMATION + base_resume_text + additional_data
 
         answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
-        resume = Resume.model_validate_json(answer)
+        new_resume = Resume.model_validate_json(answer)
+        resume = base_resume.model_copy()
+        resume.company_name = new_resume.company_name
+        resume.title = new_resume.title
+        resume.professional_summary = new_resume.professional_summary
+        resume.key_skills = new_resume.key_skills
+        resume.work_experience = new_resume.work_experience
         return resume
 
     async def adaptating_cover_letter(
@@ -103,6 +111,7 @@ class AIClient:
     ) -> str:
         """Adopting resume to the given language."""
 
+        print("Request cover_letter adaptation")
         with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
             base_resume = "My basic resume data: " + f.read()
 

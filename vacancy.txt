@@ -1,1 +1,87 @@
-Google
+affix
+Share
+Show more options
+Senior Software Engineer
+Carlton, Victoria, Australia · 2 days ago · 31 people clicked apply
+Promoted by hirer · Responses managed off LinkedIn
+ 
+ Hybrid
+Matches your job preferences, workplace type is Hybrid.
+
+ Full-time
+Matches your job preferences, job type is Full-time.
+
+Apply
+ 
+Save
+Save Senior Software Engineer at affix
+
+Your AI-powered job assessment
+You'd be a top applicant, based on your skills, experience, and chances of hearing back
+
+
+
+Show match details
+
+Tailor my resume
+
+Create cover letter
+
+Help me stand out
+
+Meet the hiring team
+
+Sonia Bonnici
+Sonia Bonnici  
+ 3rd
+GM Talent @ affix 🕹️
+Job poster
+
+Message
+About the job
+Meet: Genomical
+
+
+Product: SaaS - Genomic Information Management System
+Location: Melbourne HQ
+Employees: 10
+Work style: Hybrid, 2 days a week in office (Carlton)
+Tech stack: AWS (serverless), Python (Flask APIs), React (web portal), Splunk
+
+The Story
+Transcendomics is an innovative company established in 2024 to scale clinical genomic testing across Australia and beyond. Their product, Genomical, is a market-leading Genomic Information Management System (GIMS) that makes genomic testing safer, easier, and scalable for laboratories.
+
+Genomical bridges gaps in the genomic test workflow by automating data workflows and securely storing genomic data in a cloud-based platform. They’re building critical infrastructure that supports clinical organisations and pathology laboratories in delivering life-changing genomic tests.
+
+The Role
+As a Senior Software Engineer, you'll contribute to the development and improvement of core APIs for their proprietary orchestration service and web portal. You'll work on secure, full-stack systems in AWS with a focus on integration, automation, serverless architecture, and cloud security:
+
+Design, build, and maintain the next generation of backend services and workflows in AWS (Step Functions, Lambda, Batch/ECS, RDS) to orchestrate complex clinical genomics pipelines.
+
+Develop and evolve Python/Flask APIs and the React portal used by labs for data submissions, test configuration, and to monitor workflow status.
+
+Implement and maintain integrations with third‑party genomic tools and vendor APIs, handling increasing complexity of data flows, edge cases, and long‑running jobs.
+
+Improve and operate the platform infrastructure and software delivery pipeline (CI/CD, IaC, Observability, Security) in a highly regulated environment.
+
+What You Bring To The Role
+You bring senior, end‑to‑end engineering capability: strong AWS serverless and platform skills, solid backend development in Python/Flask, meaningful React/front‑end experience, good data and SQL instincts, and the ability to design, document, and ship robust system integrations and workflows in a regulated environment.
+
+On top of that, you bring curiosity to learn genomics and HL7 FHIR, comfort collaborating closely with product and customers, openness to feedback, and a pragmatic mindset that balances building new features with security, reliability, and maintainability.
+
+Why Join? 
+Joining Genomical offers a mix of meaningful impact, hard technical problems, and broad ownership that is rare in most roles.
+
+You’re working in a domain that matters: clinical genomics. The platform underpins how hospitals and accredited labs run genomic tests that directly influence patient care, so your work improves reliability, speed and safety in a genuinely high‑stakes environment. Genomical is effectively defining a new category, a Genomic Information Management System (GIMS), and is currently the only company doing this for clinical labs, so you help shape and advance what becomes the industry standard rather than just iterating on a legacy product.
+
+Technically, the role is rich and varied. You work across AWS serverless architecture, Python APIs, and a React portal, plus CI/CD, observability, and security. The problems are non‑trivial: orchestrating large, spiky genomic workloads; integrating with multiple evolving vendor APIs; encoding complex branching workflows; and doing it all under strict security, compliance and data‑residency constraints. You get genuine platform‑engineering scope rather than being confined to a narrow feature lane.
+
+You also get a lot of ownership and learning. The team is close-knit, collaborative and transparent: engineers participate in discovery, design, roadmap discussions, and customer‑facing technical conversations. There’s room to push on automation, CI/CD, observability, and new capabilities like analytics or AI‑assisted operations.
+
+From a career perspective, you join at a growth but de‑risked stage: the product has a eight‑year history, customers, and clear expansion paths across Australian labs and into Asia‑Pacific. You get the upside and influence of being an early team member, with the peace of mind that comes from proven product-market fit. Culturally, there is strong emphasis on work‑life balance, psychological safety, and constructive feedback, making it a good environment to do complex work sustainably.
+
+Next Steps
+Hi 👋 we’re affix. If this sounds like your next challenge, submit your application. We can't wait to meet you!
+
+sonia.bonnici@affix.com.au
+breanna.skeen@affix.com.au

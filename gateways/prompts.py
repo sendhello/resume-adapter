@@ -65,6 +65,7 @@ e) Critical constraint: Do not fabricate anything. If the resume does not provid
 6. Avoid including unnecessary personal details not common in Australian resumes.
 Note: Do not simply copy paste the original format; tailor the resume to Australian resume expectations and best practices.
 Provide the resume content as plain text formatted in a professional Australian resume style and ATS systems.
+Should be put in the field 'company_name' name of company
 Output Format:
 json with fields the same like base resume data
 """

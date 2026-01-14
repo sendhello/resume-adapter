@@ -1,11 +1,12 @@
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, ListFlowable, ListItem, PageBreak, HRFlowable
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Flowable, ListFlowable, ListItem, PageBreak, HRFlowable
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from reportlab.lib.units import mm, cm, inch
 from schemas import Resume
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT, TA_JUSTIFY
 
 
 registerFont(TTFont("CenturyGothic", "fonts/centurygothic.ttf"))
@@ -18,6 +19,49 @@ registerFontFamily(
     italic="CenturyGothic",
     boldItalic="CenturyGothic-Bold",
 )
+
+
+class SplitParagraph(Flowable):
+    """Flowable для размещения двух параграфов на одной строке"""
+
+    def __init__(self, left_text, right_text, left_style, right_style, width=None, left_part=0.7, right_part=0.3):
+        Flowable.__init__(self)
+        self.left_para = Paragraph(left_text, left_style)
+        self.right_para = Paragraph(right_text, right_style)
+        self.left_part = left_part
+        self.right_part = right_part
+        self._width = width
+
+    def wrap(self, availWidth, availHeight):
+        self.width = self._width or availWidth
+        # Получаем высоту обоих параграфов
+        left_w, left_h = self.left_para.wrap(self.width * self.left_part, availHeight)
+        right_w, right_h = self.right_para.wrap(self.width * self.right_part, availHeight)
+        self.height = max(left_h, right_h)
+        return (self.width, self.height)
+
+    def draw(self):
+        # Рисуем левый параграф
+        self.left_para.drawOn(self.canv, 0, 0)
+        # Рисуем правый параграф справа
+        right_w, right_h = self.right_para.wrap(self.width * 0.3, self.height)
+        self.right_para.drawOn(self.canv, self.width - right_w, 0)
+
+
+class IndentedListFlowable(ListFlowable):
+    """ListFlowable с отступом слева"""
+
+    def __init__(self, items, left_margin=20, **kwargs):
+        ListFlowable.__init__(self, items, **kwargs)
+        self.left_margin = left_margin
+
+    def wrap(self, availWidth, availHeight):
+        # Уменьшаем доступную ширину на величину отступа
+        return ListFlowable.wrap(self, availWidth - self.left_margin, availHeight)
+
+    def drawOn(self, canvas, x, y, _sW=0):
+        # Сдвигаем рисование вправо
+        return ListFlowable.drawOn(self, canvas, x + self.left_margin, y, _sW)
 
 
 def create_styles():
@@ -77,152 +121,135 @@ def create_styles():
 
 
 def create_simple_styles():
-    styles = getSampleStyleSheet()
-    return styles
+    stylesheet = getSampleStyleSheet()
+    stylesheet.add(ParagraphStyle(
+        name='Body',
+        parent=stylesheet["BodyText"],
+        fontName="Times-Roman",
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='BodyList',
+        parent=stylesheet["Body"],
+        spaceAfter=0,
+        spaceBefore=0,
+
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='BodySkils',
+        parent=stylesheet["Body"],
+        spaceAfter=2,
+        spaceBefore=0,
+
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='SubtitleLeft',
+        parent=stylesheet["Body"],
+        fontSize=12.5,
+        leading=17,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='SubtitleLeftBold',
+        parent=stylesheet["SubtitleLeft"],
+        fontName="Times-Bold",
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='SubtitleRight',
+        parent=stylesheet["SubtitleLeft"],
+        alignment=TA_RIGHT,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='SubtitleCenter',
+        parent=stylesheet["SubtitleLeft"],
+        alignment=TA_CENTER,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='H1',
+        parent=stylesheet["Title"],
+        fontName="Times-Bold",
+        fontSize=20,
+        spaceAfter=6,
+    ))
+    stylesheet.add(ParagraphStyle(
+        name='H3',
+        parent=stylesheet["Heading3"],
+        fontName="Times-Bold",
+        fontSize=12.5,
+        spaceAfter=1,
+        spaceBefore=10,
+    ))
+    return stylesheet
 
 
 def build_resume(path: str, title: str, resume: Resume):
     doc = SimpleDocTemplate(
         path,
         pagesize=A4,
-        leftMargin=1.48*cm, rightMargin=1.48*cm,
-        topMargin=0.63*cm, bottomMargin=1.83*cm,
-        title=title, author=resume.name
-    )
-    styles = create_styles()
-
-    flow = []
-
-    flow.append(Paragraph(resume.name, styles["H1Green"]))
-    flow.append(Paragraph(resume.title, styles["H2Green"]))
-    flow.append(Paragraph(f"{resume.phone} | {resume.email} | {resume.address}", styles["Body"]))
-    flow.append(Paragraph(" | ".join(f"{network_name}: {link}" for network_name, link in resume.websites.items()), styles["Body"]))
-    flow.append(Paragraph(f"Work rights: {resume.work_rights}", styles["Body"]))
-
-    flow.append(Paragraph("Personal summary", styles["H3Green"]))
-    flow.append(Paragraph(resume.personal_summary, styles["Body"]))
-
-    flow.append(Paragraph("Skills", styles["H3Green"]))
-    for group, skills in resume.skills.items():
-        flow.append(Paragraph(f"{group}: ", styles["H4"]))
-        flow.append(ListFlowable(
-            [ListItem(Paragraph(skill, styles["BodyWithoutSpaces"])) for skill in skills],
-            bulletType="bullet",
-            bulletFontName="CenturyGothic",
-            bulletFontSize=10.5,
-            leading=11,
-            bulletColor=colors.HexColor("#888888"),
-        ))
-
-    flow.append(Paragraph("Professional Experience", styles["H3Green"]))
-    for workplace in resume.career_history:
-        flow.append(
-            Paragraph(f"{workplace.position}, {workplace.company}, {workplace.dates} ({workplace.location})",
-                      styles["H4"]))
-        flow.append(ListFlowable(
-            [ListItem(Paragraph(responsibility, styles["BodyWithoutSpaces"])) for responsibility in workplace.responsibilities],
-            bulletType="bullet",
-            bulletFontName="CenturyGothic",
-            bulletFontSize=10.5,
-            leading=11,
-            bulletColor=colors.HexColor("#888888"),
-        ))
-
-    flow.append(Paragraph("Education & Certifications", styles["H3Green"]))
-    for edu in resume.education:
-        flow.append(
-            Paragraph(
-                f"<b>{edu.qualification}</b> - {edu.institution}, {edu.location} - {edu.dates}",
-                styles["Body"]
-            )
-        )
-
-    flow.append(Paragraph("Languages", styles["H3Green"]))
-    flow.append(Paragraph(f"{'&nbsp;'*10}".join(f"- {lang}" for lang in resume.languages), styles["Body"]))
-
-    flow.append(Paragraph("Hobbies and Interests", styles["H3Green"]))
-    flow.append(Paragraph(f"{'&nbsp;'*10}".join(f"- {hobby}" for hobby in resume.hobbies_interests), styles["Body"]))
-
-    doc.build(flow)
-
-
-def build_new_resume(path: str, title: str, resume: Resume):
-    doc = SimpleDocTemplate(
-        path,
-        pagesize=A4,
-        leftMargin=1*inch, rightMargin=1*inch,
-        topMargin=1*inch, bottomMargin=1*inch,
+        leftMargin=0.42*inch, rightMargin=0.42*inch,
+        topMargin=0.5*inch, bottomMargin=0.35*inch,
         title=title, author=resume.name
     )
     styles = create_simple_styles()
 
     flow = []
 
-    flow.append(Paragraph(resume.name, styles["Title"]))
-    websites = " | ".join(f"{network_name}: {link}" for network_name, link in resume.websites.items())
-    flow.append(Paragraph(f"VIC | {resume.phone} | {resume.email} | {websites}", styles["BodyText"]))
-    flow.append(Paragraph(f"Work rights: {resume.work_rights}", styles["BodyText"]))
+    flow.append(Paragraph(resume.name, styles["H1"]))
+    flow.append(Paragraph(f"{resume.address} | {resume.phone} | {resume.email} | {resume.linkedin}", styles["SubtitleCenter"]))
 
-    flow.append(Paragraph("PERSONAL SUMMARY", styles["Heading3"]))
-    flow.append(HRFlowable(width="100%", thickness=1, color=colors.black))
-    flow.append(Paragraph(resume.personal_summary, styles["BodyText"]))
-
-    flow.append(Paragraph("SKILLS", styles["Heading3"]))
-    flow.append(HRFlowable(width="100%", thickness=1, color=colors.black))
-    skills_items = []
-    for group, skills in resume.skills.items():
-        skills_items.append(ListItem(Paragraph(f"<b>{group}:</b> {', '.join(skills)}", styles["BodyText"])))
-
-    flow.append(ListFlowable(
-        skills_items,
-        bulletType="bullet",
-        bulletFontName="CenturyGothic",
-        bulletFontSize=10.5,
-        leading=11,
-        bulletColor=colors.HexColor("#888888"),
-    ))
-
-    flow.append(Paragraph("EDUCATION", styles["Heading3"]))
-    flow.append(HRFlowable(width="100%", thickness=1, color=colors.black))
+    flow.append(Paragraph("EDUCATION", styles["H3"]))
+    flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
     for edu in resume.education:
-        flow.append(
-            Paragraph(
-                f"<b>{edu.qualification}</b> - {edu.institution}, {edu.location} - {edu.dates}",
-                styles["BodyText"]
-            )
-        )
-
-    flow.append(Paragraph("WORK EXPERIENCE", styles["Heading3"]))
-    flow.append(HRFlowable(width="100%", thickness=1, color=colors.black))
-    for workplace in resume.career_history:
-        flow.append(
-            Paragraph(f"{workplace.position}, {workplace.company}, {workplace.dates} ({workplace.location})",
-                      styles["Heading4"]))
-        flow.append(ListFlowable(
-            [ListItem(Paragraph(responsibility, styles["BodyText"])) for responsibility in workplace.responsibilities],
-            bulletType="bullet",
-            bulletFontName="CenturyGothic",
-            bulletFontSize=10.5,
-            leading=11,
-            bulletColor=colors.HexColor("#888888"),
+        flow.append(SplitParagraph(
+            edu.institution.upper(),
+            edu.location,
+            styles["SubtitleLeftBold"],
+            styles["SubtitleRight"]
+        ))
+        flow.append(SplitParagraph(
+            edu.qualification,
+            f"<i>{edu.dates}</i>",
+            styles["SubtitleLeft"],
+            styles["SubtitleRight"]
         ))
 
-    flow.append(Paragraph("EXTRAS", styles["Heading3"]))
-    flow.append(HRFlowable(width="100%", thickness=1, color=colors.black))
-    flow.append(Paragraph("Courses & Certifications", styles["Heading3"]))
-    for cert in resume.certificates:
+    flow.append(Paragraph("WORK EXPERIENCE", styles["H3"]))
+    flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
+    for workplace in resume.work_experience:
+        flow.append(SplitParagraph(
+            workplace.company,
+            workplace.location,
+            styles["SubtitleLeftBold"],
+            styles["SubtitleRight"]
+        ))
+        flow.append(SplitParagraph(
+            f"<i>{workplace.position}</i>",
+            f"<i>{workplace.dates}</i>",
+            styles["SubtitleLeft"],
+            styles["SubtitleRight"]
+        ))
         flow.append(
-            Paragraph(
-                f"<b>{cert.qualification}</b> - {cert.institution}, {cert.location} - {cert.dates}",
-                styles["BodyText"]
+            IndentedListFlowable(
+                [ListItem(Paragraph(achiev, styles["BodyList"]), bulletIndent=30) for achiev in workplace.achievements],
+                left_margin=20,
+                bulletType="bullet",
+                spaceAfter=15,
+                spaceBefore=0,
+                bulletFontSize=16,
+                bulletOffsetY=3,
             )
         )
 
-    flow.append(Paragraph("Languages", styles["Heading3"]))
-    flow.append(Paragraph(f"{'&nbsp;'*10}".join(f"- {lang}" for lang in resume.languages), styles["BodyText"]))
+    flow.append(Paragraph("KEY SKILLS", styles["H3"]))
+    flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
+    for group, skills in resume.key_skills.items():
+        if len(skills) > 1:
+            flow.append(Paragraph(f"<b>{group}:</b> {', '.join(skills[:-1])} and {skills[-1]}", styles["BodySkils"]))
+        else:
+            flow.append(Paragraph(f"<b>{group}:</b> {', '.join(skills)}", styles["BodySkils"]))
 
-    flow.append(Paragraph("Hobbies and Interests", styles["Heading3"]))
-    flow.append(Paragraph(f"{'&nbsp;'*10}".join(f"- {hobby}" for hobby in resume.hobbies_interests), styles["BodyText"]))
+    flow.append(Paragraph("PROFESSIONAL  SUMMARY", styles["H3"]))
+    flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
+    flow.append(Paragraph(resume.professional_summary, styles["Body"]))
+    flow.append(Paragraph(f"<b>GitHub</b>: {resume.github}", styles["Body"]))
 
     doc.build(flow)
 
@@ -231,18 +258,23 @@ def build_cover_letter(path: str, title: str, text: str, position: str, company_
     doc = SimpleDocTemplate(
         path,
         pagesize=A4,
-        leftMargin=1.48*cm, rightMargin=1.48*cm,
-        topMargin=0.63*cm, bottomMargin=1.83*cm,
+        leftMargin=0.42 * inch, rightMargin=0.42 * inch,
+        topMargin=0.5 * inch, bottomMargin=0.35 * inch,
         title=title, author=author
     )
-    styles = create_styles()
+    styles = create_simple_styles()
+
     flow = []
-    flow.append(Paragraph(f"{position} - {company_name}", styles["Heading3"]))
-    flow.extend([Paragraph(article, styles["BodyText"]) for article in text.split("\n")])
-    flow.append(Paragraph("", styles["BodyText"]))
-    flow.append(Paragraph("Kind regards,", styles["BodyText"]))
-    flow.append(Paragraph("Ivan Bazhenov", styles["BodyText"]))
-    flow.append(Paragraph("Kensington, VIC", styles["BodyText"]))
-    flow.append(Paragraph("0466 284 180 | bazhenov.in@gmail.com", styles["BodyText"]))
-    flow.append(Paragraph("LinkedIn: linkedin.com/in/sendhello | GitHub: github.com/sendhello", styles["BodyText"]))
+
+    flow.append(Paragraph(f"{position} - {company_name}", styles["H3"]))
+    flow.extend([Paragraph(article, styles["Body"]) for article in text.split("\n")])
+    flow.append(Paragraph("", styles["Body"]))
+    if not "regards" in text:
+        flow.append(Paragraph("Kind regards,", styles["Body"]))
+        flow.append(Paragraph("Ivan Bazhenov", styles["Body"]))
+        flow.append(Paragraph("Melbourne, VIC", styles["Body"]))
+        flow.append(Paragraph("0466 284 180 | bazhenov.in@gmail.com", styles["Body"]))
+        flow.append(Paragraph("LinkedIn: linkedin.com/in/sendhello", styles["Body"]))
+        flow.append(Paragraph("GitHub: github.com/sendhello", styles["Body"]))
+
     doc.build(flow)

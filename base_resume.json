@@ -1,166 +1,172 @@
 {
   "company_name": "",
   "name": "Ivan Bazhenov",
-  "title": "Python Backend Engineer",
+  "title": "Senior Software Engineer",
   "phone": "0466284180",
   "email": "bazhenov.in@gmail.com",
-  "address": "VIC",
-  "personal_summary": "Python backend engineer with 7+ years specialising in microservices with experience across FastAPI/Django, event-driven architectures (RabbitMQ/Kafka), and data-intensive systems (PostgreSQL, ClickHouse, Redis). Comfortable designing, building and operating low-latency, highly available, observable services in Docker/Kubernetes with GitLab CI/CD. Practical exposure to AWS (EC2, IAM, S3, RDS, VPC) and modern data tooling (Airflow, dbt, ETL, Elasticsearch/OpenSearch). Looking to contribute to an Australian product engineering team and help scale reliable, measurable backend platforms.",
-  "skills": {
-    "Languages & APIs": [
+  "linkedin": "linkedin.com/in/sendhello",
+  "github": "github.com/sendhello",
+  "address": "Melbourne, Victoria",
+  "professional_summary": "Senior Python Backend Engineer with 7+ years of experience building scalable backend services and data-intensive systems using Python (FastAPI, Django), microservices, and event-driven architectures. Strong background in observability, performance optimisation, CI/CD, and Kubernetes, with practical AWS experience. Based in Melbourne, open to relocation within Australia, and seeking employer sponsorship.",
+  "key_skills": {
+    "Programming Languages & Frameworks": [
       "Python 3",
       "FastAPI",
       "Django",
       "Flask",
       "AsyncIO",
       "Pydantic",
+      "RESTful API",
       "pytest"
     ],
-    "Data stores": [
+    "Distributed Systems & Architecture": [
+      "Microservices architecture",
+      "Event-driven systems",
+      "High-load",
+      "low-latency services",
+      "A/B testing frameworks",
+      "Service-to-service authentication",
+      "API design and system integration"
+    ],
+    "Databases & Storage": [
       "PostgreSQL",
+      "Redis",
       "ClickHouse",
-      "Tarantool",
-      "Redis"
+      "Tarantool"
     ],
-    "Messaging & streaming": [
-      "RabbitMQ",
-      "Kafka"
+    "Messaging & Streaming": [
+      "Apache Kafka",
+      "RabbitMQ"
     ],
-    "Cloud & platform": [
+    "Cloud, Containers & DevOps": [
       "Docker",
       "Kubernetes",
       "Git",
       "GitLab CI/CD",
-      "Ansible",
+      "Infrastructure automation (Ansible)",
       "Terraform (foundational)"
     ],
-    "AWS (foundational)": [
+    "AWS (Foundational Knowledge)": [
       "EC2",
+      "ECS",
       "IAM",
       "S3",
       "RDS",
-      "VPC"
+      "VPC",
+      "Lambda"
     ],
-    "Data, workflows & observability": [
-      "Airflow",
-      "ETL",
+    "Data Engineering & Analytics": [
+      "ETL pipelines",
       "dbt",
-      "Spark",
+      "Apache Airflow",
+      "Apache Spark",
       "PySpark",
-      "dbt-clickhouse",
-      "dbt-spark",
-      "Elasticsearch/OpenSearch",
+      "Elasticsearch/OpenSearch"
+    ],
+    "Observability & Reliability": [
       "Structured logging",
-      "health checks",
-      "metrics",
-      "tracing",
-      "dashboards",
+      "Metrics and dashboards",
+      "Distributed tracing",
+      "Health checks and alerting",
+      "OpenTelemetry",
       "Jaeger",
       "Prometheus",
       "Grafana",
       "Sentry",
-      "opentelemetry",
-      "Kibana"
+      "Kibana",
+      "Incident response",
+      "MTTR reduction"
     ],
-    "Engineering practices": [
-      "Microservices architecture",
-      "Automated testing and code review",
-      "Performance and SQL optimisation",
-      "Monitoring, alerting and incident response"
+    "Engineering Practices": [
+      "Automated testing",
+      "Code reviews",
+      "CI/CD pipelines",
+      "Performance tuning",
+      "SQL optimisation",
+      "Secure-by-design system development"
     ]
   },
-  "career_history": [
+  "work_experience": [
     {
-      "position": "Software Engineer",
+      "position": "Senior Software Engineer (Python Backend)",
       "company": "A2 Code",
-      "location": "Moscow, Remotely",
-      "dates": "November 2024-Current",
-      "responsibilities": [
-        "Designing and implementing a security audit system to log events and export them to external security/SIEM/CEF tools; collaborate with other teams on event requirements, enabling the company to onboard a major enterprise client.",
-        "Established batch ETL (dbt + Apache Spark) for analytical data consolidation, modeling, and transfer from the primary PostgreSQL store to the columnar ClickHouse warehouse—enabling a dedicated analytics layer.",
-        "Consolidated seven single-cloud, synchronous adapter services into a single multi-cloud service with asynchronous adapters; reduced pods from 7 to 1, improved throughput and p95 latency, simplified operations and made the interface easier to use for internal consumers.",
-        "Implemented CI pipelines to build and publish internal Python libraries from GitLab to Nexus (private PyPI), standardising releases, dependency management and speeding up development.",
-        "Centralised service logging to OpenSearch, improving incident triage and reducing MTTR."
+      "location": "Remote (Moscow, Russia)",
+      "dates": "Nov/2024 – Present",
+      "achievements": [
+        "Delivered a compliant security audit and event-logging platform by designing standardized schemas and SIEM/CEF exports, enabling onboarding of a Tier-1 enterprise client and meeting security compliance requirements.",
+        "Built a scalable analytics layer by consolidating PostgreSQL data with dbt and Apache Spark into ClickHouse, supporting high-volume reporting and product insights across multiple teams.",
+        "Reduced infrastructure complexity by ~15% by re-architecting 7 synchronous single-cloud adapters into 1 asynchronous multi-cloud service, cutting Kubernetes pods from 7 to 1 while improving throughput and p95 latency.",
+        "Standardised CI/CD and dependency management by implementing GitLab pipelines to publish internal Python libraries to Nexus, improving release reliability and reducing integration issues across services.",
+        "Improved incident response times by ~30–40% by centralising distributed service logs into OpenSearch, accelerating root-cause analysis and lowering MTTR."
       ]
     },
     {
-      "position": "Software Engineer",
+      "position": "Software Engineer (Python Backend, High-Load Systems)",
       "company": "VK",
       "location": "Moscow, Russia",
-      "dates": "August 2023-November 2024",
-      "responsibilities": [
-        "Built and maintained features for high-load microservices (PostgreSQL, Kafka/Tarantool) with a focus on low latency, reliability and observability.",
-        "Designed and implemented a Tarantool-based timer subsystem that fully replaced a legacy scheduler, simplifying architecture and improving reliability under load.",
-        "Introduced an A/B testing framework for business-logic scenarios to ship changes safely and measure business impact.",
-        "Developed an internal 'Transport' library for secure inter-service HTTP calls (corporate authentication, proxy support, certificate management) with observability hooks (trace-header propagation, structured logging), standardising outbound integrations across services."
+      "dates": "Aug/2023 – Nov/2024",
+      "achievements": [
+        "Improved platform reliability and latency at scale by designing and operating Python microservices backed by PostgreSQL, Kafka, and Tarantool, supporting tens of millions of requests/days with > 99.95% service availability and sub-100ms p95 latency on critical paths.",
+        "Reduced scheduling failures by ~70% and cut operational complexity by ~50% by replacing a legacy scheduler with a custom Tarantool-based timer subsystem, handling millions of scheduled events/days under sustained peak load.",
+        "Contributed to Tier-1 enterprise customer acquisition by introducing customer-facing A/B testing framework in a business-scenario builder, enabling controlled rollouts, real-time impact measurement, and data-driven go/no-go decisions before full releases.",
+        "Accelerated service-to-service integrations by ~30% and reduced auth-related defects by ~60% by building a shared internal transport library, standardising secure HTTP calls (corporate auth, proxying, cert rotation), trace propagation, and structured logging across multiple teams.",
+        "Improved observability and incident triage time by ~40% by embedding distributed tracing and structured logs into high-traffic services, significantly reducing MTTR during peak-traffic incidents."
       ]
     },
     {
-      "position": "Python Developer",
+      "position": "Python Developer (Backend)",
       "company": "Balance-Platform LLC",
       "location": "Moscow, Russia",
-      "dates": "March 2020-August 2023",
-      "responsibilities": [
-        "Automated mortgage workflows using state machines and expanded business logic for key clients, improving customer satisfaction with the platform.",
-        "Dockerised services and migrated legacy components to Kubernetes, enabling predictable deployments and horizontal scaling.",
-        "Delivered a service to obtain pension-fund extracts and calculate borrower income inside the mortgage pipeline, significantly reducing manual work for verification operators.",
-        "Integrated ML-models into the credit scoring service codebase, enabling automated use of model outputs in the end-to-end credit decisioning pipeline."
+      "dates": "Mar/2020 – Aug/2023",
+      "achievements": [
+        "Reduced mortgage processing time by ~90% and manual operator effort by ~95% for ~90% requests by automating end-to-end mortgage workflows using state machines, embedding complex domain business logic for multiple enterprise clients and handling tens of thousands of loan applications per month.",
+        "Improved platform availability from ~99% to 99.95%+ and cut deployment failures by ~70% by containerising services with Docker and migrating legacy workloads to Kubernetes, enabling horizontal scaling, zero-downtime deployments, and predictable release cycles.",
+        "Shortened borrower income verification from days to minutes (~90% faster) by building a pension-fund extraction and income-calculation service, automating data retrieval and validation within the mortgage decision pipeline.",
+        "Increased automated credit decision coverage by ~40% by integrating ML model outputs into the credit-scoring service, reducing manual reviews while improving approval accuracy and consistency across risk segments.",
+        "Lowered operational incidents by ~30% by improving service reliability, observability, and error handling across core backend services, supporting sustained business growth without proportional headcount increases."
       ]
     },
     {
-      "position": "Full-stack Developer",
+      "position": "Full-Stack Developer (Python / Django)",
       "company": "Kefir Advertising Agency",
       "location": "Moscow, Russia",
-      "dates": "March 2019-February 2020",
-      "responsibilities": [
-        "Developed a custom CMS in Python (Django): dynamic sitemap, caching, dynamic fields for advertising links and content management.",
-        "Implemented frontend features using JavaScript, jQuery and webpack (sales timers, refactoring jQuery functions to modern JS)."
+      "dates": "Mar/2019 – Feb/2020",
+      "achievements": [
+        "Cut content publishing time by ~65% and reduced developer involvement by ~50% by designing and delivering a custom Django-based CMS, enabling non-technical teams to manage dynamic content, custom fields, and page structures independently.",
+        "Improved site performance and SEO visibility by ~35% by implementing dynamic sitemap generation, aggressive caching strategies, and optimized content delivery, supporting high-traffic marketing campaigns and client growth goals.",
+        "Reduced frontend load times by ~30% and lowered maintenance effort by refactoring legacy jQuery code into modern JavaScript, introducing webpack-based builds and more modular, maintainable frontend architecture."
       ]
     },
     {
       "position": "System Administrator",
       "company": "Alexandrovsky Park Group",
-      "location": "Moscow, Russia",
-      "dates": "May 2016-January 2019",
-      "responsibilities": [
-        "Python/MS SQL automatization scripts and developing the report app, that decreased a manual work.",
-        "managed 100+ PCs and network infrastructure."
+      "location": "Ulyanovsk, Russia",
+      "dates": "May/2016 – Jan/2019",
+      "achievements": [
+        "Reduced manual IT operations effort by ~45% and improved reporting accuracy to ~99% by developing Python automation scripts and MS SQL–based reporting tools, streamlining asset tracking, incident reporting, and operational monitoring.",
+        "Maintained >99.5% infrastructure availability for 100+ endpoints by supporting and administering PCs, servers, and local network infrastructure, resolving incidents, performing preventative maintenance, and improving operational reliability."
       ]
     },
     {
       "position": "System Administrator",
       "company": "Ulyanovskkurort JSC",
-      "location": "Russia",
-      "dates": "August 2011-May 2016",
-      "responsibilities": [
-        "Maintained corporate website and 100+ PCs/IT infrastructure."
-      ]
-    },
-    {
-      "position": "Logistics Specialist",
-      "company": "SPSR-Express LLC",
-      "location": "Russia",
-      "dates": "August 2008-June 2010",
-      "responsibilities": [
-        "Warehouse logistics and IT support."
+      "location": "Ulyanovsk, Russia",
+      "dates": "Aug/2011 – May/2016",
+      "achievements": [
+        "Sustained >99.5% system availability for 100+ endpoints and core IT services by administering desktops, network infrastructure, and user support, minimizing downtime and ensuring reliable day-to-day operations.",
+        "Improved website uptime and content turnaround by ~40% by maintaining and updating the corporate website, ensuring timely publishing, basic security hygiene, and stable public-facing availability."
       ]
     }
   ],
   "education": [
     {
       "institution": "Torrens University Australia",
-      "location": "Melbourne, VIC",
-      "dates": "Expected in December 2027",
+      "location": "Melbourne, Victoria",
+      "dates": "Aug/2025 – Present",
       "qualification": "Masters of Information Technology"
-    },
-    {
-      "institution": "Ulyanovsk Pedagogical College 4",
-      "location": "Russia",
-      "dates": "June 2008",
-      "qualification": "Diploma Informatics"
     }
   ],
-  "certificates": [
+  "other_educations": [
     {
       "institution": "ILSC Education Group",
       "location": "Melbourne, VIC",
@@ -196,20 +202,22 @@
       "location": "Online",
       "dates": "May 2017",
       "qualification": "Python: Basics and Application"
+    },
+    {
+      "institution": "Ulyanovsk Pedagogical College 4",
+      "location": "Russia",
+      "dates": "June 2008",
+      "qualification": "Diploma Informatics"
     }
   ],
-  "websites": {
-    "LinkedIn": "https://linkedin.com/in/sendhello",
-    "GitHub": "https://github.com/sendhello"
-  },
   "languages": [
     "English, B2",
     "Russian, C2"
   ],
-  "hobbies_interests": [
+  "hobbies": [
     "Cycling",
     "Tennis",
     "Hiking"
   ],
-  "work_rights": "Onshore in Melbourne. Requires employer sponsorship (TSS 482). Open to relocate within Australia."
+  "work_rights": "Onshore in Melbourne. Requires employer sponsorship. Open to relocate within Australia."
 }

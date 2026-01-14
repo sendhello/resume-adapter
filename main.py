@@ -1,5 +1,5 @@
 from gateways.openai import get_ai_client, AIClient
-from pdf import build_new_resume, build_cover_letter
+from pdf import build_resume, build_cover_letter
 import asyncio
 from schemas import Resume, ResumeType
 import os
@@ -15,16 +15,18 @@ async def main():
     with open("addition.txt", "r") as f:
         addition_text = f.read()
 
-    resume = await ai_client.adaptating_resume(
+
+    resume_coro = ai_client.adaptating_resume(
         vacanсy_text=vacanсy_text,
         addition_text=addition_text,
         resume_type=ResumeType.SoftwareEngineer
     )
-    cover_letter = await ai_client.adaptating_cover_letter(
+    cover_letter_coro = ai_client.adaptating_cover_letter(
         vacanсy_text=vacanсy_text,
         addition_text=addition_text,
         resume_type=ResumeType.SoftwareEngineer
     )
+    resume, cover_letter = await asyncio.gather(resume_coro, cover_letter_coro, return_exceptions=True)
 
     base_path = '/Users/ivanbazhenov/Library/Mobile Documents/com~apple~CloudDocs/Documents/Look a Job'
     base_folder_name = resume.company_name.replace(" ", "_").replace("/", "_").replace("-", "_").lower()
@@ -40,7 +42,7 @@ async def main():
     os.makedirs(folder_name)
 
 
-    build_new_resume(
+    build_resume(
         path=os.path.join(folder_name, "resume.pdf"),
         title="Report",
         resume=resume,
