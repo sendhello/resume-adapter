@@ -1,3 +1,4 @@
+import asyncio
 import json
 import re
 import sys
@@ -6,6 +7,21 @@ from dataclasses import dataclass
 from html import unescape
 from html.parser import HTMLParser
 from typing import Callable, Iterable, List, Optional, Tuple
+
+try:
+    import aiohttp
+except Exception:
+    aiohttp = None
+
+DEFAULT_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/121.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9,ru;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
 
 
 @dataclass
@@ -207,16 +223,7 @@ def _extract_from_json_ld(html: str) -> Optional[str]:
 
 
 def _fetch_html(url: str, timeout: float = 15.0) -> str:
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/121.0.0.0 Safari/537.36"
-        ),
-        "Accept-Language": "en-US,en;q=0.9,ru;q=0.8",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    }
-    req = urllib.request.Request(url, headers=headers, method="GET")
+    req = urllib.request.Request(url, headers=DEFAULT_HEADERS, method="GET")
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         content_type = resp.headers.get("Content-Type", "")
         charset = "utf-8"
@@ -230,28 +237,18 @@ def _fetch_html(url: str, timeout: float = 15.0) -> str:
             return data.decode("utf-8", errors="replace")
 
 
-def parse_vacancy_text(url: Optional[str] = None, html: Optional[str] = None) -> str:
-    """
-    Возвращает очищенный текст описания вакансии с популярных досок (Seek, LinkedIn, Indeed и др.).
+async def _fetch_html_async(url: str, timeout: float = 15.0) -> str:
+    if aiohttp is None:
+        return await asyncio.to_thread(_fetch_html, url, timeout)
 
-    Параметры:
-    - url: ссылка на страницу вакансии (опционально, но хотя бы url или html должны быть заданы)
-    - html: исходный HTML страницы (если уже получен вне этой функции)
+    request_timeout = aiohttp.ClientTimeout(total=timeout)
+    async with aiohttp.ClientSession(headers=DEFAULT_HEADERS) as session:
+        async with session.get(url, timeout=request_timeout) as response:
+            response.raise_for_status()
+            return await response.text()
 
-    Функция сначала пробует извлечь описание из JSON-LD (если присутствует),
-    затем — парсит DOM и вытаскивает текст из наиболее вероятных контейнеров
-    (по id/class/атрибутам), игнорируя скрипты и лишний шум.
 
-    Возвращает:
-      Строку с текстом описания вакансии. Если ничего надёжно не найдено —
-      возвращает пустую строку или общий текст страницы (как фолбэк).
-    """
-    if not html and not url:
-        raise ValueError("Необходимо передать либо url, либо html")
-
-    # Загружаем HTML при необходимости
-    page_html = html or _fetch_html(url)  # type: ignore[arg-type]
-
+def _parse_vacancy_text_from_html(url: Optional[str], page_html: str) -> str:
     # 1) Попробуем JSON-LD
     desc = _extract_from_json_ld(page_html)
     if desc:
@@ -281,6 +278,41 @@ def parse_vacancy_text(url: Optional[str] = None, html: Optional[str] = None) ->
         return text
     except Exception:
         return ""
+
+
+def parse_vacancy_text(url: Optional[str] = None, html: Optional[str] = None) -> str:
+    """
+    Возвращает очищенный текст описания вакансии с популярных досок (Seek, LinkedIn, Indeed и др.).
+
+    Параметры:
+    - url: ссылка на страницу вакансии (опционально, но хотя бы url или html должны быть заданы)
+    - html: исходный HTML страницы (если уже получен вне этой функции)
+
+    Функция сначала пробует извлечь описание из JSON-LD (если присутствует),
+    затем — парсит DOM и вытаскивает текст из наиболее вероятных контейнеров
+    (по id/class/атрибутам), игнорируя скрипты и лишний шум.
+
+    Возвращает:
+      Строку с текстом описания вакансии. Если ничего надёжно не найдено —
+      возвращает пустую строку или общий текст страницы (как фолбэк).
+    """
+    if not html and not url:
+        raise ValueError("Необходимо передать либо url, либо html")
+
+    # Загружаем HTML при необходимости
+    page_html = html or _fetch_html(url)  # type: ignore[arg-type]
+    return _parse_vacancy_text_from_html(url=url, page_html=page_html)
+
+
+async def parse_vacancy_text_async(url: Optional[str] = None, html: Optional[str] = None) -> str:
+    """
+    Асинхронная версия parse_vacancy_text.
+    """
+    if not html and not url:
+        raise ValueError("Необходимо передать либо url, либо html")
+
+    page_html = html or await _fetch_html_async(url)  # type: ignore[arg-type]
+    return _parse_vacancy_text_from_html(url=url, page_html=page_html)
 
 
 if __name__ == "__main__":

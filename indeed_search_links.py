@@ -1,4 +1,5 @@
 import argparse
+import asyncio
 import html
 import json
 import re
@@ -14,12 +15,27 @@ try:
 except Exception:
     cloudscraper = None
 
+try:
+    import aiohttp
+except Exception:
+    aiohttp = None
+
 BASE_URL = "https://au.indeed.com"
 RESULTS_PER_PAGE = 50
 
 SEARCH_QUERY = """
 Python AND ("software engineer" OR "software developer" OR "backend engineer" OR "backend developer" OR "API developer" OR "API engineer" OR "web developer" OR "web engineer" OR "full stack developer" OR "full stack engineer" OR "fullstack developer" OR "systems engineer" OR "systems developer" OR "applications developer" OR "application developer" OR "programmer" OR "engineer" OR "developer") NOT TypeScript NOT React NOT "Machine Learning" NOT Lead NOT Staff NOT QA
 """.strip()
+
+DEFAULT_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/122.0.0.0 Safari/537.36"
+    ),
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
 
 
 def _build_session() -> Any:
@@ -29,17 +45,7 @@ def _build_session() -> Any:
         )
     else:
         session = requests.Session()
-    session.headers.update(
-        {
-            "User-Agent": (
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/122.0.0.0 Safari/537.36"
-            ),
-            "Accept-Language": "en-US,en;q=0.9",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        }
-    )
+    session.headers.update(DEFAULT_HEADERS)
     return session
 
 
@@ -59,6 +65,19 @@ def _fetch_html(session: Any, url: str, timeout: float = 30.0) -> str:
 def fetch_html(session: Any, url: str, timeout: float = 30.0) -> str:
     """Public wrapper for loading HTML with common error handling."""
     return _fetch_html(session=session, url=url, timeout=timeout)
+
+
+async def fetch_html_async(session: Any, url: str, timeout: float = 30.0) -> str:
+    """Async HTML loader for aiohttp sessions."""
+    if aiohttp is None:
+        raise RuntimeError("Package 'aiohttp' is required for async mode")
+
+    request_timeout = aiohttp.ClientTimeout(total=timeout)
+    async with session.get(url, timeout=request_timeout) as response:
+        if response.status == 403:
+            raise RuntimeError("Indeed returned 403 (bot protection). Try again later or reduce request rate.")
+        response.raise_for_status()
+        return await response.text()
 
 
 def _is_valid_jk(jk: str) -> bool:
@@ -143,6 +162,42 @@ def search_indeed_links(query: str = SEARCH_QUERY, pages: int = 1, pause_seconds
     return all_links
 
 
+async def search_indeed_links_async(
+    query: str = SEARCH_QUERY,
+    pages: int = 1,
+    pause_seconds: float = 0.5,
+) -> list[str]:
+    if aiohttp is None:
+        raise RuntimeError("Package 'aiohttp' is required for async mode")
+    if pages < 1:
+        raise ValueError("pages must be >= 1")
+
+    async with aiohttp.ClientSession(headers=DEFAULT_HEADERS) as session:
+        # Инициализируем cookies на домене Indeed перед поиском.
+        await fetch_html_async(session=session, url=BASE_URL)
+
+        all_links: list[str] = []
+        seen: set[str] = set()
+        for page in range(pages):
+            params = {
+                "q": query,
+                "start": str(page * RESULTS_PER_PAGE),
+            }
+            search_url = f"{BASE_URL}/jobs?{urllib.parse.urlencode(params)}"
+            search_html = await fetch_html_async(session=session, url=search_url)
+            page_links = _extract_links(search_html)
+
+            for link in page_links:
+                if link not in seen:
+                    seen.add(link)
+                    all_links.append(link)
+
+            if pause_seconds > 0 and page < pages - 1:
+                await asyncio.sleep(pause_seconds)
+
+    return all_links
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Fetch job result links from au.indeed.com using a predefined query."
@@ -160,7 +215,10 @@ def _parse_args() -> argparse.Namespace:
 def main() -> int:
     args = _parse_args()
     try:
-        links = search_indeed_links(pages=args.pages, pause_seconds=args.pause)
+        if aiohttp is None:
+            links = search_indeed_links(pages=args.pages, pause_seconds=args.pause)
+        else:
+            links = asyncio.run(search_indeed_links_async(pages=args.pages, pause_seconds=args.pause))
     except Exception as exc:
         print(f"Failed to fetch links: {exc}", file=sys.stderr)
         return 1
