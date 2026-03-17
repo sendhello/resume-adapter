@@ -63,6 +63,7 @@ e) Critical constraint: Do not fabricate anything. If the resume does not provid
 4. Use clear, concise language appropriate for Australian job markets.
 5. Format the resume for easy reading with appropriate headings and bullet points.
 6. Avoid including unnecessary personal details not common in Australian resumes.
+7. Avoid often using simbol "-", and instead "‑" use "-".
 Note: Do not simply copy paste the original format; tailor the resume to Australian resume expectations and best practices.
 Provide the resume content as plain text formatted in a professional Australian resume style and ATS systems.
 Should be put in the field 'company_name' name of company
@@ -100,7 +101,7 @@ Set information about I require sponsorship (TSS 482) in Australia for full-time
 BASE_INFORMATION = """
 Base information about me:
 I’m Ivan Bazhenov based in Melbourne, Australia (onshore). I currently work remotely as a Senior Python Engineer.
-I live in Melbourne, VIC, Kensington, 3031, Australia
+I live in Melbourne, VIC, Highett, 3190, Australia
 I’m improving my English (now - B2 level)
 Now I study Masters of Information Technology at the Torrens University Australia
 I enjoy cycling, hiking, tennis, coffee culture, and researching local tech and lifestyle options

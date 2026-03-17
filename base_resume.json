@@ -32,7 +32,8 @@
       "PostgreSQL",
       "Redis",
       "ClickHouse",
-      "Tarantool"
+      "Tarantool",
+      "Microsoft SQL Server"
     ],
     "Messaging & Streaming": [
       "Apache Kafka",
@@ -111,7 +112,8 @@
         "Reduced scheduling failures by ~70% and cut operational complexity by ~50% by replacing a legacy scheduler with a custom Tarantool-based timer subsystem, handling millions of scheduled events/days under sustained peak load.",
         "Contributed to Tier-1 enterprise customer acquisition by introducing customer-facing A/B testing framework in a business-scenario builder, enabling controlled rollouts, real-time impact measurement, and data-driven go/no-go decisions before full releases.",
         "Accelerated service-to-service integrations by ~30% and reduced auth-related defects by ~60% by building a shared internal transport library, standardising secure HTTP calls (corporate auth, proxying, cert rotation), trace propagation, and structured logging across multiple teams.",
-        "Improved observability and incident triage time by ~40% by embedding distributed tracing and structured logs into high-traffic services, significantly reducing MTTR during peak-traffic incidents."
+        "Improved observability and incident triage time by ~40% by embedding distributed tracing and structured logs into high-traffic services, significantly reducing MTTR during peak-traffic incidents.",
+        "Improved platform stability under peak load for a multitenant bot-constructor platform handling 2,000+ RPS by designing and implementing a migration of high-write PostgreSQL workloads to Tarantool in-memory storage, removing a critical database bottleneck and enabling reliable performance during traffic spikes."
       ]
     },
     {
