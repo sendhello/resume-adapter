@@ -167,10 +167,21 @@ async def search_indeed_links_async(
     pages: int = 1,
     pause_seconds: float = 0.5,
 ) -> list[str]:
-    if aiohttp is None:
-        raise RuntimeError("Package 'aiohttp' is required for async mode")
     if pages < 1:
         raise ValueError("pages must be >= 1")
+
+    # Indeed often blocks plain aiohttp traffic.
+    # If cloudscraper is available, use it in a worker thread for better resilience.
+    if cloudscraper is not None:
+        return await asyncio.to_thread(
+            search_indeed_links,
+            query,
+            pages,
+            pause_seconds,
+        )
+
+    if aiohttp is None:
+        raise RuntimeError("Package 'aiohttp' is required for async mode")
 
     async with aiohttp.ClientSession(headers=DEFAULT_HEADERS) as session:
         # Инициализируем cookies на домене Indeed перед поиском.

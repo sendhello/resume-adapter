@@ -1,89 +1,101 @@
-Automation / AI Engineer
-
-Uniti Group Limited
-View all jobs
-Melbourne VIC (Hybrid)
-Developers/Programmers (Information & Communication Technology)
-Full time
-Add expected salary to your profile for insights
-Posted 1d ago
-•
-Medium application volume
-
-How you match
-1 skill or credential matches your profile
- Python Programming
-Show all⁠
-We are one of Australia's fastest growing companies. We design, build and maintain world-class digital infrastructure, encompassing fibre networks, communication platforms, residential internet and voice services.
-
-We believe our people are vital to our success. We strive to create an environment that appeals to the very best people in the industry, providing them with an exciting, market leading and satisfying workplace, and rewarding their performance.
+Mosh
 
 
-About the Role:
+Senior Software Engineer
+Sydney, New South Wales, Australia · 4 days ago · 92 people clicked apply
+Promoted by hirer · Responses managed off LinkedIn
 
-We are seeking an Automation / AI Engineer to design, develop, and deploy intelligent automation and AI solutions that improve operational efficiency and unlock valuable data insights across the business.
+Hybrid
 
-Working closely with teams across Wholesale, Retail, and CPaaS, you will identify automation opportunities, build AI-enabled workflows, and integrate smart tools into operational processes.
+Full-time
 
-This role plays a key part in driving innovation and supporting the organisation’s technology strategy by delivering practical, secure, and scalable automation solutions using technologies such as AI, machine learning, and intelligent data platforms.
+Apply
 
-Responsibilities include but not limited to:
+Save
+Use AI to assess how you fit
+Get AI-powered advice on this job and more exclusive features with Premium. Reactivate Premium
 
-Design, develop, and maintain automation solutions to streamline internal processes and reduce manual effort.
-Identify opportunities to improve operational workflows through automation technologies, APIs, and system integrations.
-Develop scalable automation frameworks and reusable components to support efficient solution delivery.
-Design and implement AI-driven tools to enhance decision-making, operational insights, and customer experience.
-Develop AI-enabled solutions including intelligent agents, natural language processing tools, predictive models, and data-driven automation.
-Collaborate with business and technology stakeholders to translate operational challenges into automation and AI solutions.
-Analyse workflows across business units to identify high-impact automation and process optimisation opportunities.
-Integrate automation and AI capabilities across enterprise systems, data platforms, and operational tools.
-Develop and maintain APIs, scripts, and connectors to enable secure system interoperability and data exchange.
-Monitor and measure the impact of automation initiatives, including productivity improvements and operational efficiencies.
-Ensure solutions align with enterprise architecture, security, governance, and privacy standards.
-Stay informed on emerging technologies and pilot innovative solutions that support continuous improvement.
-About you:
 
-The ideal person for this role will have/be:
+Show match details
 
-Problem Solver: Strong analytical mindset with the ability to turn business challenges into effective technical solutions.
-Automation Mindset: Passionate about improving efficiency through automation and system optimisation.
-Innovative Thinker: Curious and proactive in exploring emerging technologies and AI capabilities.
-Collaborative: Works seamlessly with both technical and non-technical stakeholders to achieve results.
-Detail-Oriented: Ensures solutions are robust, reliable, and secure.
-Adaptable: Thrives in a fast-evolving technology environment and embraces change.
-Accountable: Takes ownership of deliverables and drives meaningful outcomes.
-Effective Communicator: Clearly articulates technical solutions to business stakeholders.
-Qualification & Experience:
+Tailor my resume
 
-Automation Platforms: Experience developing automation solutions using modern tools, scripting, and APIs.
-AI & Machine Learning: Experience implementing AI or intelligent automation solutions.
-Programming: Proficiency in languages such as PHP, C#, or Python.
-Systems Integration: Experience integrating systems via APIs and workflow automation platforms.
-Cloud Platforms: Familiarity with modern cloud environments supporting AI and automation.
-Data & Analytics: Experience working with data pipelines or analytics platforms.
-Security Awareness: Understanding of secure development practices, data governance, and compliance standards.
-Experience: 3–7+ years in software development, automation engineering, AI engineering, or similar roles.
-Education: Tertiary qualifications in Computer Science, Software Engineering, Data Science, or related field.
-About us:
+Help me stand out
+People you can reach out to
 
-Uniti Group is an exciting, dynamic and fast-growing word-class digital infrastructure company.
+Sarah Lawrence (Munn) 
+• 3rd
+Operations Manager Mosh
+School alum from Torrens University Australia
+Message
+Meet the hiring team
 
-At Uniti Group we are absolutely committed to fostering an inclusive and diverse workplace where everyone feels valued and respected. We strongly encourage applications from individuals from culturally and linguistically diverse backgrounds, First Nations people, and people with disabilities. We believe that diversity a key driver of innovation and success. We strive to provide equal opportunities for all employees, regardless of their background or identity, and are dedicated to creating an environment where everyone feels respected, supported and empowered to achieve their full potential. Join our team and become part of a company that values diversity and inclusivity at its core.
 
-All genders are encouraged to apply.
+Cadence Iresare 
+• 3rd
+People Operations, Talent & Culture
+Job poster
+Message
+About the job
+G’day, we’re Mosh & Moshy.
+Our mission is to get Aussies the best possible health outcomes through best-in class health programs. We know the current healthcare system is not meeting the needs of the modern Australian, and we reckon there’s a better, more holistic way. Our solutions for hair loss, sexual health, skin care, mental health and weight management are easy, accessible and completely discreet.
 
-If this role sounds like you, we would like to hear from you! You must have the right to live and work in in Australia to apply for this role. For current opportunities, please visit our Careers Portal at https://unitigrouplimited.elmotalent.com.au/careers/careers/jobs
+More than a job
+There’s nothing better than the feeling that what you’re doing matters and makes a difference. We’re pretty lucky that this is the norm, not the exception.
 
-Questions about the role to be emailed directly to our HR team at recruitment@unitigrouplimited.com
+Reporting to a Staff Engineer, this Senior Software Engineer will play a key role in building, maintaining and evolving the core Mosh & Moshy platforms.
 
-No recruiters please, we manage our recruitment in-house.
-Employer questions
-Your application will include the following questions:
-Are you legally entitled to work in Australia?
-Do you have the right to work unrestricted hours in Australia? Please note if you are an Australian citizen / permanent resident or NZ citizen you should answer YES to this question.
-If you are not a citizen or permanent resident of Australia, please provide details of your visa type, expiry date, and working hours restrictions if any. If you are a citizen / permanent resident simply indicate "N/A"
-Please detail your minimum salary expectations (excluding super):
-What is the notice period for your current employment?
-All roles require a criminal history check to be performed as part of the recruitment process for shortlisted candidates. Please acknowledge that you are aware of this and are willing to participate if needed.
-If you were referred, please specify Referred Employees Name
-As an applicant, I fully understand that the answers I provide during the recruitment process will have an influence on the outcome and final selection process. I therefore give my permission for my answers to be discussed with those relevant to the decision making process. All questions asked are relevant to the role as well as our legal and client obligations. The information I supply to our organisation during the recruitment process is true and correct. Additionally I have read, understood and I consent to the disclosure statement.
+You’ll work closely with product, design and data to ship high-quality experiences across our web applications – contributing not just to delivery, but to how we build, scale and improve as an engineering team. This is a role for someone who enjoys being hands-on in the code, while also shaping technical direction, mentoring others and lifting engineering standards across the board.
+
+What you’ll do
+On a day-to-day basis, you will:
+Collaborate closely with engineers, product and design to deliver high-quality product outcomes
+Write clean, scalable and maintainable code across our core applications
+Break down user stories into well-defined technical tasks and contribute to delivery planning
+Lead the development of features and MVPs from concept through to deployment
+Contribute to system design, architecture decisions and future technical direction
+Improve developer workflows, tooling and processes to enhance both speed and quality
+Advance and maintain our APIs and services to support product and business performance
+Lead engineering input into product and feature design discussions
+Mentor and support junior and mid-level engineers, contributing to a strong team culture
+Continuously explore new technologies and ways of working to improve our stack and output
+
+Experience you’ll bring
+We’re looking for someone with a strong product engineering mindset – someone who cares about what gets built, not just how it’s built.
+
+You’ll likely bring:
+6+ years’ experience in software development
+Experience building and scaling production systems and applications
+Strong understanding of modern engineering patterns, system design and architecture
+Experience with at least one modern JavaScript framework (e.g. React)
+Experience working with backend technologies (e.g. Ruby, Java or similar)
+Familiarity with cloud infrastructure (AWS, GCP or similar)
+Experience with CI/CD pipelines, testing practices and modern development workflows
+Experience working within Agile teams (Kanban, Scrum or similar)
+
+How you work
+You take a product mindset – thinking about user impact and business outcomes
+You’re comfortable in a fast-moving, evolving environment
+You think critically and approach problems with curiosity and pragmatism
+You care about quality, performance and long-term maintainability
+You’re collaborative and communicate clearly across teams
+You’re proactive, take ownership and follow things through
+You’re open to experimentation — and comfortable failing fast and iterating
+
+What’s on offer
+Flexible working: we support a mix of in-office, hybrid and remote working across Australia. If you’re Sydney-based, you’ll typically spend 3 days in our Surry Hills office – it’s a great space to collaborate – with flexibility to work from home.
+
+What’s on offer
+Flexible working: we support a mix of in-office, hybrid and remote working across Australia. If you’re Sydney-based, you’ll typically spend 3 days in our Surry Hills office – it’s a great space to collaborate – with flexibility to work from home.
+
+You'll also enjoy:
+Access to on-demand training and development
+Up to 16 weeks paid parental leave
+Product discounts
+Two extra days of annual leave each year
+Purpose leave (mental health or L&D)
+EAP and wellbeing programs
+ClassPass discount
+
+Better, together
+We value diversity of thought, background, and perspective. If you’re excited about this role but don’t meet every requirement, we still encourage you to apply. Come help us shape the future of healthcare at Mosh & Moshy!

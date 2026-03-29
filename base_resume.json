@@ -7,7 +7,7 @@
   "linkedin": "linkedin.com/in/sendhello",
   "github": "github.com/sendhello",
   "address": "Melbourne, Victoria",
-  "professional_summary": "Senior Python Backend Engineer with 7+ years of experience building scalable backend services and data-intensive systems using Python (FastAPI, Django), microservices, and event-driven architectures. Strong background in observability, performance optimisation, CI/CD, and Kubernetes, with practical AWS experience. Based in Melbourne, open to relocation within Australia, and seeking employer sponsorship.",
+  "professional_summary": "Senior Python Backend Engineer with 7+ years of experience in scalable backend services, data-intensive systems, and fintech domain (mortgage automation, credit decisioning, payment workflows). Proficient in Python (FastAPI, Django), microservices, event-driven architectures, and high-load systems handling tens of millions of requests per day. Strong background in observability, CI/CD, Kubernetes, and cloud infrastructure. Based in Melbourne with full Australian work rights (48 hrs/fortnight). Available for contract, fixed-term, and ongoing roles. Open to relocation within Australia.",
   "key_skills": {
     "Programming Languages & Frameworks": [
       "Python 3",
@@ -17,22 +17,24 @@
       "AsyncIO",
       "Pydantic",
       "RESTful API",
-      "pytest"
+      "pytest",
+      "OpenAI API"
     ],
     "Distributed Systems & Architecture": [
       "Microservices architecture",
       "Event-driven systems",
-      "High-load",
-      "low-latency services",
-      "A/B testing frameworks",
+      "High-load, low-latency services",
+      "State machine-based workflow engines",
       "Service-to-service authentication",
-      "API design and system integration"
+      "API design and system integration",
+      "Multi-tenant architecture"
     ],
     "Databases & Storage": [
       "PostgreSQL",
       "Redis",
       "ClickHouse",
       "Tarantool",
+      "Elasticsearch/OpenSearch",
       "Microsoft SQL Server"
     ],
     "Messaging & Streaming": [
@@ -48,7 +50,7 @@
       "Infrastructure automation (Ansible)",
       "Terraform (foundational)"
     ],
-    "AWS (Foundational Knowledge)": [
+    "AWS": [
       "EC2",
       "ECS",
       "IAM",
@@ -62,71 +64,65 @@
       "dbt",
       "Apache Airflow",
       "Apache Spark",
-      "PySpark",
-      "Elasticsearch/OpenSearch"
+      "PySpark"
     ],
     "Observability & Reliability": [
       "Structured logging",
-      "Metrics and dashboards",
-      "Distributed tracing",
+      "Distributed tracing (OpenTelemetry, Jaeger)",
+      "Metrics and dashboards (Prometheus, Grafana)",
       "Health checks and alerting",
-      "OpenTelemetry",
-      "Jaeger",
-      "Prometheus",
-      "Grafana",
       "Sentry",
       "Kibana",
-      "Incident response",
-      "MTTR reduction"
+      "Incident response and MTTR reduction"
     ],
     "Engineering Practices": [
       "Automated testing",
       "Code reviews",
       "CI/CD pipelines",
-      "Performance tuning",
-      "SQL optimisation",
-      "Secure-by-design system development"
+      "Performance tuning and SQL optimisation",
+      "Secure-by-design system development",
+      "Security audit logging (SIEM/CEF)"
     ]
   },
   "work_experience": [
     {
       "position": "Senior Software Engineer (Python Backend)",
-      "company": "A2 Code",
+      "company": "A2 Code — Cloud Infrastructure",
       "location": "Remote (Moscow, Russia)",
       "dates": "Nov/2024 – Present",
       "achievements": [
-        "Delivered a compliant security audit and event-logging platform by designing standardized schemas and SIEM/CEF exports, enabling onboarding of a Tier-1 enterprise client and meeting security compliance requirements.",
-        "Built a scalable analytics layer by consolidating PostgreSQL data with dbt and Apache Spark into ClickHouse, supporting high-volume reporting and product insights across multiple teams.",
+        "Delivered a compliant security audit and event-logging platform with standardised schemas and SIEM/CEF exports, enabling onboarding of a Tier-1 enterprise client and meeting security compliance requirements.",
+        "Built a scalable analytics layer consolidating PostgreSQL data with dbt and Apache Spark into ClickHouse, supporting high-volume reporting and product insights across multiple teams.",
         "Reduced infrastructure complexity by ~15% by re-architecting 7 synchronous single-cloud adapters into 1 asynchronous multi-cloud service, cutting Kubernetes pods from 7 to 1 while improving throughput and p95 latency.",
-        "Standardised CI/CD and dependency management by implementing GitLab pipelines to publish internal Python libraries to Nexus, improving release reliability and reducing integration issues across services.",
+        "Standardised CI/CD and dependency management with GitLab pipelines publishing internal Python libraries to Nexus, improving release reliability and reducing integration issues across services.",
         "Improved incident response times by ~30–40% by centralising distributed service logs into OpenSearch, accelerating root-cause analysis and lowering MTTR."
       ]
     },
     {
       "position": "Software Engineer (Python Backend, High-Load Systems)",
-      "company": "VK",
+      "company": "VK — Russia's Largest Social Media Platform",
       "location": "Moscow, Russia",
       "dates": "Aug/2023 – Nov/2024",
       "achievements": [
-        "Improved platform reliability and latency at scale by designing and operating Python microservices backed by PostgreSQL, Kafka, and Tarantool, supporting tens of millions of requests/days with > 99.95% service availability and sub-100ms p95 latency on critical paths.",
-        "Reduced scheduling failures by ~70% and cut operational complexity by ~50% by replacing a legacy scheduler with a custom Tarantool-based timer subsystem, handling millions of scheduled events/days under sustained peak load.",
-        "Contributed to Tier-1 enterprise customer acquisition by introducing customer-facing A/B testing framework in a business-scenario builder, enabling controlled rollouts, real-time impact measurement, and data-driven go/no-go decisions before full releases.",
-        "Accelerated service-to-service integrations by ~30% and reduced auth-related defects by ~60% by building a shared internal transport library, standardising secure HTTP calls (corporate auth, proxying, cert rotation), trace propagation, and structured logging across multiple teams.",
-        "Improved observability and incident triage time by ~40% by embedding distributed tracing and structured logs into high-traffic services, significantly reducing MTTR during peak-traffic incidents.",
-        "Improved platform stability under peak load for a multitenant bot-constructor platform handling 2,000+ RPS by designing and implementing a migration of high-write PostgreSQL workloads to Tarantool in-memory storage, removing a critical database bottleneck and enabling reliable performance during traffic spikes."
+        "Designed and operated Python microservices backed by PostgreSQL, Kafka, and Tarantool, supporting tens of millions of requests per day with >99.95% service availability and sub-100ms p95 latency on critical paths.",
+        "Reduced scheduling failures by ~70% and operational complexity by ~50% by replacing a legacy scheduler with a custom Tarantool-based timer subsystem, handling millions of scheduled events per day under sustained peak load.",
+        "Contributed to Tier-1 enterprise customer acquisition by building an A/B testing framework in a business-scenario builder, enabling controlled rollouts and data-driven go/no-go decisions before full releases.",
+        "Accelerated service-to-service integrations by ~30% and reduced auth-related defects by ~60% by building a shared internal transport library standardising secure HTTP calls, trace propagation, and structured logging across multiple teams.",
+        "Improved observability and incident triage time by ~40% by embedding distributed tracing (OpenTelemetry, Jaeger) and structured logs into high-traffic services.",
+        "Migrated high-write PostgreSQL workloads to Tarantool in-memory storage on a multitenant bot-constructor platform handling 2,000+ RPS, removing a critical database bottleneck during traffic spikes."
       ]
     },
     {
-      "position": "Python Developer (Backend)",
+      "position": "Python Developer (Backend) — Fintech / Mortgage Automation",
       "company": "Balance-Platform LLC",
       "location": "Moscow, Russia",
       "dates": "Mar/2020 – Aug/2023",
       "achievements": [
-        "Reduced mortgage processing time by ~90% and manual operator effort by ~95% for ~90% requests by automating end-to-end mortgage workflows using state machines, embedding complex domain business logic for multiple enterprise clients and handling tens of thousands of loan applications per month.",
-        "Improved platform availability from ~99% to 99.95%+ and cut deployment failures by ~70% by containerising services with Docker and migrating legacy workloads to Kubernetes, enabling horizontal scaling, zero-downtime deployments, and predictable release cycles.",
-        "Shortened borrower income verification from days to minutes (~90% faster) by building a pension-fund extraction and income-calculation service, automating data retrieval and validation within the mortgage decision pipeline.",
-        "Increased automated credit decision coverage by ~40% by integrating ML model outputs into the credit-scoring service, reducing manual reviews while improving approval accuracy and consistency across risk segments.",
-        "Lowered operational incidents by ~30% by improving service reliability, observability, and error handling across core backend services, supporting sustained business growth without proportional headcount increases."
+        "Reduced mortgage processing time by ~90% and manual operator effort by ~95% for ~90% of requests by automating end-to-end mortgage workflows using state machines, handling tens of thousands of loan applications per month for multiple enterprise banking clients.",
+        "Improved platform availability from ~99% to 99.95%+ and cut deployment failures by ~70% by containerising services with Docker and migrating legacy workloads to Kubernetes with zero-downtime deployments.",
+        "Shortened borrower income verification from days to minutes (~90% faster) by building a pension-fund data extraction and income-calculation service within the mortgage decision pipeline.",
+        "Increased automated credit decision coverage by ~40% by integrating ML model outputs into the credit-scoring service, reducing manual reviews while improving approval accuracy across risk segments.",
+        "Lowered operational incidents by ~30% by improving service reliability, observability, and error handling across core backend services."
       ]
     },
     {
@@ -135,19 +131,19 @@
       "location": "Moscow, Russia",
       "dates": "Mar/2019 – Feb/2020",
       "achievements": [
-        "Cut content publishing time by ~65% and reduced developer involvement by ~50% by designing and delivering a custom Django-based CMS, enabling non-technical teams to manage dynamic content, custom fields, and page structures independently.",
-        "Improved site performance and SEO visibility by ~35% by implementing dynamic sitemap generation, aggressive caching strategies, and optimized content delivery, supporting high-traffic marketing campaigns and client growth goals.",
-        "Reduced frontend load times by ~30% and lowered maintenance effort by refactoring legacy jQuery code into modern JavaScript, introducing webpack-based builds and more modular, maintainable frontend architecture."
+        "Cut content publishing time by ~65% and reduced developer involvement by ~50% by designing a custom Django-based CMS enabling non-technical teams to manage dynamic content independently.",
+        "Improved site performance and SEO visibility by ~35% by implementing dynamic sitemap generation, caching strategies, and optimised content delivery for high-traffic marketing campaigns.",
+        "Reduced frontend load times by ~30% by refactoring legacy jQuery code into modern JavaScript with webpack-based builds."
       ]
     },
     {
-      "position": "System Administrator",
+      "position": "System Administrator / Python Automation Developer",
       "company": "Alexandrovsky Park Group",
       "location": "Ulyanovsk, Russia",
       "dates": "May/2016 – Jan/2019",
       "achievements": [
-        "Reduced manual IT operations effort by ~45% and improved reporting accuracy to ~99% by developing Python automation scripts and MS SQL–based reporting tools, streamlining asset tracking, incident reporting, and operational monitoring.",
-        "Maintained >99.5% infrastructure availability for 100+ endpoints by supporting and administering PCs, servers, and local network infrastructure, resolving incidents, performing preventative maintenance, and improving operational reliability."
+        "Reduced manual IT operations effort by ~45% by developing Python automation scripts and MS SQL–based reporting tools for asset tracking, incident reporting, and operational monitoring.",
+        "Maintained >99.5% infrastructure availability for 100+ endpoints across PCs, servers, and local network infrastructure."
       ]
     },
     {
@@ -156,9 +152,28 @@
       "location": "Ulyanovsk, Russia",
       "dates": "Aug/2011 – May/2016",
       "achievements": [
-        "Sustained >99.5% system availability for 100+ endpoints and core IT services by administering desktops, network infrastructure, and user support, minimizing downtime and ensuring reliable day-to-day operations.",
-        "Improved website uptime and content turnaround by ~40% by maintaining and updating the corporate website, ensuring timely publishing, basic security hygiene, and stable public-facing availability."
+        "Sustained >99.5% system availability for 100+ endpoints; maintained corporate website with ~40% improvement in uptime and content turnaround."
       ]
+    }
+  ],
+  "personal_projects": [
+    {
+      "name": "Auth Service",
+      "url": "github.com/sendhello/auth-service",
+      "description": "Production-grade authentication and authorisation microservice with JWT, Google OAuth, multi-tenant architecture, rate limiting, and OpenTelemetry tracing. FastAPI, PostgreSQL, Redis, Docker, GitHub Actions CI/CD with automated testing and security scanning."
+    },
+    {
+      "name": "Order Service",
+      "url": "github.com/sendhello/order-service",
+      "description": "Multi-tenant order management microservice with JWT-based auth integration, FastAPI, PostgreSQL, Redis."
+    },
+    {
+      "name": "AI Resume Tailor",
+      "description": "Application that adapts resumes to job descriptions using OpenAI API, automating keyword matching and content restructuring."
+    },
+    {
+      "name": "Translator Chat Bot",
+      "description": "AI-powered chatbot that breaks down text into words and expressions for language learning, storing vocabulary for spaced repetition study."
     }
   ],
   "education": [
@@ -166,7 +181,7 @@
       "institution": "Torrens University Australia",
       "location": "Melbourne, Victoria",
       "dates": "Aug/2025 – Present",
-      "qualification": "Masters of Information Technology"
+      "qualification": "Master of Information Technology"
     }
   ],
   "other_educations": [
@@ -222,5 +237,5 @@
     "Tennis",
     "Hiking"
   ],
-  "work_rights": "Onshore in Melbourne. Requires employer sponsorship. Open to relocate within Australia."
+  "work_rights": "Onshore in Melbourne with current Australian work rights (Student visa, 48 hrs/fortnight; full-time available during study breaks). Available for contract, fixed-term, and part-time roles. Open to relocation within Australia."
 }
