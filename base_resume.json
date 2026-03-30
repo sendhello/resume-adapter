@@ -7,7 +7,7 @@
   "linkedin": "linkedin.com/in/sendhello",
   "github": "github.com/sendhello",
   "address": "Melbourne, Victoria",
-  "professional_summary": "Senior Python Backend Engineer with 7+ years of experience in scalable backend services, data-intensive systems, and fintech domain (mortgage automation, credit decisioning, payment workflows). Proficient in Python (FastAPI, Django), microservices, event-driven architectures, and high-load systems handling tens of millions of requests per day. Strong background in observability, CI/CD, Kubernetes, and cloud infrastructure. Based in Melbourne with full Australian work rights (48 hrs/fortnight). Available for contract, fixed-term, and ongoing roles. Open to relocation within Australia.",
+  "professional_summary": "Senior Python Backend Engineer with 7+ years of experience in scalable backend services, data-intensive systems, and fintech domain (mortgage automation, credit decisioning, payment workflows). Proficient in Python (FastAPI, Django), microservices, event-driven architectures, and high-load systems handling tens of millions of requests per day. Strong background in observability, CI/CD, Kubernetes, and cloud infrastructure. Based in Melbourne with current Australian work rights. Available for contract, fixed-term, and part-time roles. Open to relocation within Australia.",
   "key_skills": {
     "Programming Languages & Frameworks": [
       "Python 3",
@@ -87,7 +87,7 @@
   "work_experience": [
     {
       "position": "Senior Software Engineer (Python Backend)",
-      "company": "A2 Code — Cloud Infrastructure",
+      "company": "A2 Code — Enterprise cloud security platform",
       "location": "Remote (Moscow, Russia)",
       "dates": "Nov/2024 – Present",
       "achievements": [
@@ -100,7 +100,7 @@
     },
     {
       "position": "Software Engineer (Python Backend, High-Load Systems)",
-      "company": "VK — Russia's Largest Social Media Platform",
+      "company": "VK — Russia's largest social media and tech platform, ~100M+ users, comparable to Meta",
       "location": "Moscow, Russia",
       "dates": "Aug/2023 – Nov/2024",
       "achievements": [
@@ -229,8 +229,8 @@
     }
   ],
   "languages": [
-    "English, B2",
-    "Russian, C2"
+    "English, Professional working proficiency",
+    "Russian, Fluent"
   ],
   "hobbies": [
     "Cycling",

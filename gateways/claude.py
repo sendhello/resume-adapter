@@ -1,70 +1,66 @@
 import json
 import logging
 
-from openai import AsyncOpenAI, OpenAIError, PermissionDeniedError
+import anthropic
+from anthropic import AsyncAnthropic
 
 from core.settings import settings
-from gateways.prompts import ADAPTING_RESUME, AU_RESUME, AU_COVER_LETTER
+from gateways.prompts import AU_RESUME, AU_COVER_LETTER
 from schemas import Resume, ResumeType
 import orjson
-from schemas import Resume
-from openai.types.shared.chat_model import ChatModel
-
 
 logger = logging.getLogger(__name__)
-
 
 ENGINEER_RESUME = "base_resume.json"
 SA_RESUME = "base_resume_sa.json"
 
 
-class AIClient:
+class ClaudeAIClient:
     def __init__(self, use_cache: bool = False):
-        self.client = AsyncOpenAI(
-            api_key=settings.openai_api_key.get_secret_value(),
-            organization=settings.openai_organization_id,
-            project=settings.openai_project_id,
+        self.client = AsyncAnthropic(
+            api_key=settings.anthropic_api_key.get_secret_value(),
         )
         self.use_cache = use_cache
 
-    async def _chat_asc(self, prompt: str, text: str, model: ChatModel) -> str | None:
-        """Асинхронный метод для отправки запроса к OpenAI API и получения ответа.
-        """
+    async def _chat_asc(self, prompt: str, text: str, model: str) -> str | None:
         if self.use_cache:
             try:
                 with open("cache.json", "rb") as f:
                     result = orjson.loads(f.read())
                     if not result:
                         raise FileNotFoundError
-
                     return result
-
-            except FileNotFoundError as e:
+            except FileNotFoundError:
                 pass
 
+        if not text or not text.strip():
+            logger.error("Cannot send empty user message to Claude API")
+            return None
+
         try:
-            response = await self.client.chat.completions.create(
+            response = await self.client.messages.create(
                 model=model,
-                messages=[
-                    {"role": "system", "content": prompt},
-                    {"role": "user", "content": text},
-                ],
-                response_format={"type": "json_object"},
+                max_tokens=8096,
+                system=prompt,
+                messages=[{"role": "user", "content": text}],
             )
-
-            logger.debug(f"Response from OpenAI: {response}")
-            if not response.choices:
-                raise OpenAIError("Empty response from API.")
-
-        except PermissionDeniedError as e:
-            logger.error(f"Error in OpenAI chat completion: {e}")
+            logger.debug(f"Response from Claude: {response}")
+        except anthropic.PermissionDeniedError as e:
+            logger.error(f"Claude permission denied: {e}")
             return None
-
         except Exception as e:
-            logger.error(f"Error in OpenAI chat completion: {e}")
+            logger.error(f"Error in Claude chat completion: {e}")
             return None
 
-        result = response.choices[0].message.content
+        result = response.content[0].text
+
+        # Strip markdown code fences if Claude wraps JSON in ```json ... ```
+        stripped = result.strip()
+        if stripped.startswith("```"):
+            lines = stripped.splitlines()
+            # Remove first and last fence lines
+            inner = lines[1:-1] if lines[-1].strip() == "```" else lines[1:]
+            result = "\n".join(inner)
 
         with open("cache.json", "wb") as f:
             f.write(orjson.dumps(result))
@@ -75,17 +71,18 @@ class AIClient:
             self,
             vacanсy_text: str,
             addition_text: str,
-            model: ChatModel = settings.ai_model,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer
+            model: str = None,
+            resume_type: ResumeType = ResumeType.SoftwareEngineer,
     ) -> Resume:
-        """Adopting resume to the given language."""
+        if model is None:
+            model = settings.claude_model
 
-        print("Request resume adaptation")
+        print("Request resume adaptation (Claude)")
         with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
             base_resume = Resume.model_validate_json(f.read())
             base_resume_text = "My basic resume data: " + base_resume.model_dump_json()
 
-            additional_data = ''
+            additional_data = ""
             if addition_text.strip():
                 additional_data = "Additional information for the resume: " + addition_text
 
@@ -105,24 +102,25 @@ class AIClient:
             self,
             vacanсy_text: str,
             addition_text: str,
-            model: ChatModel = settings.ai_model,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer
+            model: str = None,
+            resume_type: ResumeType = ResumeType.SoftwareEngineer,
     ) -> str:
-        """Adopting resume to the given language."""
+        if model is None:
+            model = settings.claude_model
 
-        print("Request cover_letter adaptation")
+        print("Request cover_letter adaptation (Claude)")
         with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
             base_resume = "My basic resume data: " + f.read()
 
-            additional_data = ''
+            additional_data = ""
             if addition_text.strip():
                 additional_data = "Additional information for the resume: " + addition_text
 
             prompt = AU_COVER_LETTER + base_resume + additional_data
 
         answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
-        return json.loads(answer)['cover_letter']
+        return json.loads(answer)["cover_letter"]
 
 
-def get_ai_client(use_cache: bool = False) -> AIClient:
-    return AIClient(use_cache=use_cache)
+def get_claude_client(use_cache: bool = False) -> ClaudeAIClient:
+    return ClaudeAIClient(use_cache=use_cache)
