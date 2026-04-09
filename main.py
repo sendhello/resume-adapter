@@ -5,6 +5,7 @@ import shutil
 
 from core.settings import settings
 from pdf import build_resume, build_cover_letter
+from schemas import Resume
 
 
 def parse_args():
@@ -40,70 +41,85 @@ def parse_args():
     return parser.parse_args()
 
 
-async def main():
-    args = parse_args()
-
-    if args.provider == "claude":
+def create_ai_client(provider: str, use_cache: bool):
+    if provider == "claude":
         from gateways.claude import get_claude_client
-        ai_client = get_claude_client(use_cache=args.cache)
+        return get_claude_client(use_cache=use_cache)
     else:
         from gateways.openai import get_ai_client
-        ai_client = get_ai_client(use_cache=args.cache)
+        return get_ai_client(use_cache=use_cache)
 
-    kwargs = {}
-    if args.model:
-        kwargs["model"] = args.model
 
-    with open(settings.vacancy_file, "r") as f:
-        vacancy_text = f.read()
+def load_text_file(path: str) -> str:
+    with open(path, "r") as f:
+        return f.read()
 
-    with open(args.addition, "r") as f:
-        addition_text = f.read()
 
-    resume_coro = ai_client.adaptating_resume(
-        vacancy_text=vacancy_text,
-        addition_text=addition_text,
-        resume_type=args.resume_type,
-        **kwargs,
-    )
-    cover_letter_coro = ai_client.adaptating_cover_letter(
-        vacancy_text=vacancy_text,
-        addition_text=addition_text,
-        resume_type=args.resume_type,
-        **kwargs,
-    )
-    resume, cover_letter = await asyncio.gather(resume_coro, cover_letter_coro, return_exceptions=True)
-    if isinstance(resume, Exception):
-        raise resume
-    if isinstance(cover_letter, Exception):
-        raise cover_letter
-
-    base_path = settings.output_dir
-    base_folder_name = resume.company_name.replace(" ", "_").replace("/", "_").replace("-", "_").lower()
-    folder_name = os.path.join(base_path, base_folder_name)
+def prepare_output_dir(company_name: str) -> str:
+    base_folder = company_name.replace(" ", "_").replace("/", "_").replace("-", "_").lower()
+    folder_path = os.path.join(settings.output_dir, base_folder)
     counter = 2
 
-    while os.path.exists(folder_name):
-        folder_name = os.path.join(base_path, f"{base_folder_name}_{counter}")
+    while os.path.exists(folder_path):
+        folder_path = os.path.join(settings.output_dir, f"{base_folder}_{counter}")
         counter += 1
 
-    os.makedirs(folder_name)
+    os.makedirs(folder_path)
+    return folder_path
 
+
+def generate_pdfs(output_dir: str, resume: Resume, cover_letter: str):
     build_resume(
-        path=os.path.join(folder_name, "resume.pdf"),
+        path=os.path.join(output_dir, "resume.pdf"),
         title="Report",
         resume=resume,
     )
-
     build_cover_letter(
-        path=os.path.join(folder_name, "cover_letter.pdf"),
+        path=os.path.join(output_dir, "cover_letter.pdf"),
         title="Cover letter",
         text=cover_letter,
         position=resume.title,
         company_name=resume.company_name,
     )
 
-    shutil.copy(settings.vacancy_file, os.path.join(folder_name, "vacancy.txt"))
+
+async def main():
+    args = parse_args()
+
+    ai_client = create_ai_client(args.provider, use_cache=args.cache)
+
+    kwargs = {}
+    if args.model:
+        kwargs["model"] = args.model
+
+    vacancy_text = load_text_file(settings.vacancy_file)
+    addition_text = load_text_file(args.addition)
+
+    resume, cover_letter = await asyncio.gather(
+        ai_client.adaptating_resume(
+            vacancy_text=vacancy_text,
+            addition_text=addition_text,
+            resume_type=args.resume_type,
+            **kwargs,
+        ),
+        ai_client.adaptating_cover_letter(
+            vacancy_text=vacancy_text,
+            addition_text=addition_text,
+            resume_type=args.resume_type,
+            **kwargs,
+        ),
+        return_exceptions=True,
+    )
+    if isinstance(resume, Exception):
+        raise resume
+    if isinstance(cover_letter, Exception):
+        raise cover_letter
+
+    output_dir = prepare_output_dir(resume.company_name)
+    generate_pdfs(output_dir, resume, cover_letter)
+    shutil.copy(settings.vacancy_file, os.path.join(output_dir, "vacancy.txt"))
+
+    print(f"Done! Output saved to: {output_dir}")
 
 
 asyncio.run(main())
