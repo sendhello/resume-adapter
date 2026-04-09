@@ -22,14 +22,14 @@ class Resume(BaseModel):
     title: str
     phone: str
     email: str
-    linkedin: str
-    github: str
+    linkedin: str = ""
+    github: str = ""
     address: str
     professional_summary: str
     key_skills: dict[str, list[str]]
     work_experience: list[Experience]
     education: list[Education]
-    other_educations: list[Education]
-    languages: list[str]
-    hobbies: list[str]
-    work_rights: str
+    other_educations: list[Education] = []
+    languages: list[str] = []
+    hobbies: list[str] = []
+    work_rights: str = ""

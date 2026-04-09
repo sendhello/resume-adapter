@@ -4,9 +4,11 @@
   "title": "System Administrator",
   "phone": "0466284180",
   "email": "bazhenov.in@gmail.com",
+  "linkedin": "linkedin.com/in/sendhello",
+  "github": "github.com/sendhello",
   "address": "Highett, VIC 3190",
-  "personal_summary": "System administrator with experience supporting 100+ workstations, Windows/Linux servers and small office networks in hospitality, healthcare and logistics. Comfortable with on-prem infrastructure (AD, MS SQL, 1C, LAMP), CCTV and PBX administration, terminal services, backup/restore, and hardware lifecycle. Confident scripting in Python/SQL/VBA to automate reports and routine operations. Currently based in Melbourne on a Student visa (subclass 500) and seeking a part-time system administrator / IT support role (up to 48 hours per fortnight).",
-  "skills": {
+  "professional_summary": "System administrator with experience supporting 100+ workstations, Windows/Linux servers and small office networks in hospitality, healthcare and logistics. Comfortable with on-prem infrastructure (AD, MS SQL, 1C, LAMP), CCTV and PBX administration, terminal services, backup/restore, and hardware lifecycle. Confident scripting in Python/SQL/VBA to automate reports and routine operations. Currently based in Melbourne on a Student visa (subclass 500) and seeking a part-time system administrator / IT support role (up to 48 hours per fortnight).",
+  "key_skills": {
     "Operating systems & servers": [
       "Windows Server (AD, RDS, file/print services)",
       "Linux servers (Debian, Ubuntu, CentOS)",
@@ -42,7 +44,7 @@
       "NGINX",
       "Apache",
       "uWSGI",
-      "Let’s Encrypt / Certbot",
+      "Let's Encrypt / Certbot",
       "Backup and restore procedures",
       "Basic SEO and site maintenance"
     ],
@@ -60,15 +62,15 @@
       "Basic Ansible for deployments"
     ]
   },
-  "career_history": [
+  "work_experience": [
     {
       "position": "Software Engineer",
       "company": "A2 Code",
       "location": "Moscow, Remotely",
       "dates": "November 2024-Current",
-      "responsibilities": [
+      "achievements": [
         "Designing and implementing a security audit system to log events and export them to external security/SIEM/CEF tools; collaborate with other teams on event requirements, enabling the company to onboard a major enterprise client.",
-        "Established batch ETL (dbt + Apache Spark) for analytical data consolidation, modeling, and transfer from the primary PostgreSQL store to the columnar ClickHouse warehouse—enabling a dedicated analytics layer.",
+        "Established batch ETL (dbt + Apache Spark) for analytical data consolidation, modeling, and transfer from the primary PostgreSQL store to the columnar ClickHouse warehouse - enabling a dedicated analytics layer.",
         "Consolidated seven single-cloud, synchronous adapter services into a single multi-cloud service with asynchronous adapters; reduced pods from 7 to 1, improved throughput and p95 latency, simplified operations and made the interface easier to use for internal consumers.",
         "Implemented CI pipelines to build and publish internal Python libraries from GitLab to Nexus (private PyPI), standardising releases, dependency management and speeding up development.",
         "Centralised service logging to OpenSearch, improving incident triage and reducing MTTR."
@@ -79,7 +81,7 @@
       "company": "VK",
       "location": "Moscow, Russia",
       "dates": "August 2023-November 2024",
-      "responsibilities": [
+      "achievements": [
         "Built and maintained features for high-load microservices (PostgreSQL, Kafka/Tarantool) with a focus on low latency, reliability and observability.",
         "Designed and implemented a Tarantool-based timer subsystem that fully replaced a legacy scheduler, simplifying architecture and improving reliability under load.",
         "Introduced an A/B testing framework for business-logic scenarios to ship changes safely and measure business impact.",
@@ -91,10 +93,10 @@
       "company": "Balance-Platform LLC",
       "location": "Moscow, Russia",
       "dates": "March 2020-August 2023",
-      "responsibilities": [
-          "Automated mortgage workflows using state machines and expanded business logic for key clients, improving customer satisfaction with the platform.",
-          "Dockerised services and migrated legacy components to Kubernetes, enabling predictable deployments and horizontal scaling.",
-          "Delivered a service to obtain pension-fund extracts and calculate borrower income inside the mortgage pipeline, significantly reducing manual work for verification operators."
+      "achievements": [
+        "Automated mortgage workflows using state machines and expanded business logic for key clients, improving customer satisfaction with the platform.",
+        "Dockerised services and migrated legacy components to Kubernetes, enabling predictable deployments and horizontal scaling.",
+        "Delivered a service to obtain pension-fund extracts and calculate borrower income inside the mortgage pipeline, significantly reducing manual work for verification operators."
       ]
     },
     {
@@ -102,12 +104,12 @@
       "company": "Kefir Advertising Agency",
       "location": "Moscow, Russia",
       "dates": "March 2019-February 2020",
-      "responsibilities": [
+      "achievements": [
         "Maintained and extended an in-house CMS (Python, Django, Django ORM, PostgreSQL, Redis, Memcached) used to host client websites.",
         "Created and deployed new client websites on Django-based CMS and MODX, including basic SEO setup and monitoring.",
         "Performed frontend development tasks (JavaScript, Grunt, Webpack, AJAX, Sass, CSS) for marketing and promo pages.",
         "Deployed websites to production using Ansible, including automated release steps and rollback procedures.",
-        "Configured and maintained Linux web servers (Debian, NGINX, Apache, uWSGI), SSL certificates (Let’s Encrypt/Certbot), backups and routing.",
+        "Configured and maintained Linux web servers (Debian, NGINX, Apache, uWSGI), SSL certificates (Let's Encrypt/Certbot), backups and routing.",
         "Administered terminal servers (RDP) and provided user support for office staff."
       ]
     },
@@ -116,11 +118,11 @@
       "company": "Alexandrovsky Park Group",
       "location": "Ulyanovsk, Russia",
       "dates": "May 2016-January 2019",
-      "responsibilities": [
+      "achievements": [
         "Supported and maintained over 100 workstations, office equipment and POS hardware in a hotel and restaurant group.",
         "Administered Windows and Linux servers, including LAMP, MS SQL Server, 1C and other business-critical services.",
         "Developed Python, JavaScript, SQL and VBA scripts to automate system administration tasks and financial reporting.",
-        "Designed and maintained a desktop reporting application based on Python and MS SQL (project published on GitHub: https://github.com/sendhello/Barsic.Report).",
+        "Designed and maintained a desktop reporting application based on Python and MS SQL.",
         "Developed and administered corporate websites for the hotel group.",
         "Configured network equipment and built local area networks (LAN) for offices and facilities.",
         "Managed procurement and lifecycle of IT hardware and software licences.",
@@ -132,7 +134,7 @@
       "company": "Ulyanovskkurort JSC",
       "location": "Ulyanovsk, Russia",
       "dates": "August 2011-May 2016",
-      "responsibilities": [
+      "achievements": [
         "Developed, administered and performed basic SEO for the corporate website of a medical and wellness organisation.",
         "Administered Windows servers (MS SQL Server, 1C, hMailServer and related services).",
         "Supported more than 100 workstations, office equipment and POS systems across multiple sites.",
@@ -146,7 +148,7 @@
       "company": "SPSR-Express LLC",
       "location": "Ulyanovsk, Russia",
       "dates": "August 2008-June 2010",
-      "responsibilities": [
+      "achievements": [
         "Handled warehouse logistics for a courier company: sorting and packing parcels, documentation, shipment tracking and cash handling at the pickup point.",
         "Provided basic IT support and system administration for a small office environment (about 8 PCs)."
       ]
@@ -165,6 +167,14 @@
       "dates": "July 2025",
       "qualification": "ELICOS, General English"
     },
+    {
+      "institution": "Ulyanovsk Pedagogical College 4",
+      "location": "Russia",
+      "dates": "June 2008",
+      "qualification": "Diploma Informatics"
+    }
+  ],
+  "other_educations": [
     {
       "institution": "Slurm.io",
       "location": "Online",
@@ -194,23 +204,13 @@
       "location": "Online",
       "dates": "May 2017",
       "qualification": "Python: Basics and Application"
-    },
-    {
-      "institution": "Ulyanovsk Pedagogical College 4",
-      "location": "Russia",
-      "dates": "June 2008",
-      "qualification": "Diploma Informatics"
     }
   ],
-  "websites": {
-    "LinkedIn": "https://www.linkedin.com/in/sendhello",
-    "GitHub": "https://github.com/sendhello"
-  },
   "languages": [
     "English, B2",
     "Russian, C2"
   ],
-  "hobbies_interests": [
+  "hobbies": [
     "Cycling",
     "Tennis",
     "Hiking"

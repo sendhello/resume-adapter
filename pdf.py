@@ -193,7 +193,10 @@ def build_resume(path: str, title: str, resume: Resume):
     flow = []
 
     flow.append(Paragraph(resume.name, styles["H1"]))
-    flow.append(Paragraph(f"{resume.address} | {resume.phone} | {resume.email} | {resume.linkedin}", styles["SubtitleCenter"]))
+    contact_parts = [resume.address, resume.phone, resume.email]
+    if resume.linkedin:
+        contact_parts.append(resume.linkedin)
+    flow.append(Paragraph(" | ".join(contact_parts), styles["SubtitleCenter"]))
 
     flow.append(Paragraph("EDUCATION", styles["H3"]))
     flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
@@ -249,7 +252,8 @@ def build_resume(path: str, title: str, resume: Resume):
     flow.append(Paragraph("PROFESSIONAL  SUMMARY", styles["H3"]))
     flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
     flow.append(Paragraph(resume.professional_summary, styles["Body"]))
-    flow.append(Paragraph(f"<b>GitHub</b>: {resume.github}", styles["Body"]))
+    if resume.github:
+        flow.append(Paragraph(f"<b>GitHub</b>: {resume.github}", styles["Body"]))
 
     doc.build(flow)
 
