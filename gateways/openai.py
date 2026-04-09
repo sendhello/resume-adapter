@@ -4,10 +4,10 @@ import logging
 from openai import AsyncOpenAI, OpenAIError, PermissionDeniedError
 from openai.types.shared.chat_model import ChatModel
 
+from core.cache import read_cache, write_cache
 from core.settings import settings
 from gateways.prompts import format_resume_prompt, format_cover_letter_prompt
 from schemas import Resume
-import orjson
 
 logger = logging.getLogger(__name__)
 
@@ -23,14 +23,9 @@ class AIClient:
 
     async def _chat_asc(self, prompt: str, text: str, model: ChatModel) -> str | None:
         if self.use_cache:
-            try:
-                with open("cache.json", "rb") as f:
-                    result = orjson.loads(f.read())
-                    if not result:
-                        raise FileNotFoundError
-                    return result
-            except FileNotFoundError:
-                pass
+            cached = read_cache(prompt, text)
+            if cached is not None:
+                return cached
 
         try:
             response = await self.client.chat.completions.create(
@@ -55,10 +50,7 @@ class AIClient:
             return None
 
         result = response.choices[0].message.content
-
-        with open("cache.json", "wb") as f:
-            f.write(orjson.dumps(result))
-
+        write_cache(prompt, text, result)
         return result
 
     async def adaptating_resume(

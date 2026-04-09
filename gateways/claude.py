@@ -4,10 +4,10 @@ import logging
 import anthropic
 from anthropic import AsyncAnthropic
 
+from core.cache import read_cache, write_cache
 from core.settings import settings
 from gateways.prompts import format_resume_prompt, format_cover_letter_prompt
 from schemas import Resume
-import orjson
 
 logger = logging.getLogger(__name__)
 
@@ -21,14 +21,9 @@ class ClaudeAIClient:
 
     async def _chat_asc(self, prompt: str, text: str, model: str) -> str | None:
         if self.use_cache:
-            try:
-                with open("cache.json", "rb") as f:
-                    result = orjson.loads(f.read())
-                    if not result:
-                        raise FileNotFoundError
-                    return result
-            except FileNotFoundError:
-                pass
+            cached = read_cache(prompt, text)
+            if cached is not None:
+                return cached
 
         if not text or not text.strip():
             logger.error("Cannot send empty user message to Claude API")
@@ -58,9 +53,7 @@ class ClaudeAIClient:
             inner = lines[1:-1] if lines[-1].strip() == "```" else lines[1:]
             result = "\n".join(inner)
 
-        with open("cache.json", "wb") as f:
-            f.write(orjson.dumps(result))
-
+        write_cache(prompt, text, result)
         return result
 
     async def adaptating_resume(
