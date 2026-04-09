@@ -254,7 +254,12 @@ def build_resume(path: str, title: str, resume: Resume):
     doc.build(flow)
 
 
-def build_cover_letter(path: str, title: str, text: str, position: str, company_name: str, author: str = "Ivan Bazhenov"):
+def build_cover_letter(path: str, title: str, text: str, position: str, company_name: str, author: str = None):
+    from core.settings import settings
+
+    if author is None:
+        author = settings.personal_name
+
     doc = SimpleDocTemplate(
         path,
         pagesize=A4,
@@ -269,12 +274,14 @@ def build_cover_letter(path: str, title: str, text: str, position: str, company_
     flow.append(Paragraph(f"{position} - {company_name}", styles["H3"]))
     flow.extend([Paragraph(article, styles["Body"]) for article in text.split("\n")])
     flow.append(Paragraph("", styles["Body"]))
-    if not "regards" in text:
+    if "regards" not in text:
         flow.append(Paragraph("Kind regards,", styles["Body"]))
-        flow.append(Paragraph("Ivan Bazhenov", styles["Body"]))
-        flow.append(Paragraph("Melbourne, VIC", styles["Body"]))
-        flow.append(Paragraph("0466 284 180 | bazhenov.in@gmail.com", styles["Body"]))
-        flow.append(Paragraph("LinkedIn: linkedin.com/in/sendhello", styles["Body"]))
-        flow.append(Paragraph("GitHub: github.com/sendhello", styles["Body"]))
+        flow.append(Paragraph(settings.personal_name, styles["Body"]))
+        flow.append(Paragraph(settings.personal_location, styles["Body"]))
+        flow.append(Paragraph(f"{settings.personal_phone} | {settings.personal_email}", styles["Body"]))
+        if settings.personal_linkedin:
+            flow.append(Paragraph(f"LinkedIn: {settings.personal_linkedin}", styles["Body"]))
+        if settings.personal_github:
+            flow.append(Paragraph(f"GitHub: {settings.personal_github}", styles["Body"]))
 
     doc.build(flow)

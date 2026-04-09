@@ -3,17 +3,18 @@ import asyncio
 import os
 import shutil
 
+from core.settings import settings
 from pdf import build_resume, build_cover_letter
-from schemas import ResumeType
 
 
 def parse_args():
+    available_types = list(settings.resume_templates.keys())
     parser = argparse.ArgumentParser(description="Resume adapter")
     parser.add_argument(
         "--provider",
         choices=["openai", "claude"],
-        default="openai",
-        help="AI provider to use (default: openai)",
+        default=settings.default_provider,
+        help=f"AI provider to use (default: {settings.default_provider})",
     )
     parser.add_argument(
         "--model",
@@ -22,9 +23,9 @@ def parse_args():
     )
     parser.add_argument(
         "--resume-type",
-        choices=["engineer", "sa"],
-        default="engineer",
-        help="Resume type: engineer (default) or sa (system administrator)",
+        choices=available_types,
+        default=settings.default_resume_type,
+        help=f"Resume type (default: {settings.default_resume_type}). Available: {', '.join(available_types)}",
     )
     parser.add_argument(
         "--cache",
@@ -42,11 +43,6 @@ def parse_args():
 async def main():
     args = parse_args()
 
-    resume_type = (
-        ResumeType.SistemAdministrator if args.resume_type == "sa"
-        else ResumeType.SoftwareEngineer
-    )
-
     if args.provider == "claude":
         from gateways.claude import get_claude_client
         ai_client = get_claude_client(use_cache=args.cache)
@@ -58,22 +54,22 @@ async def main():
     if args.model:
         kwargs["model"] = args.model
 
-    with open("vacancy.txt", "r") as f:
-        vacanсy_text = f.read()
+    with open(settings.vacancy_file, "r") as f:
+        vacancy_text = f.read()
 
     with open(args.addition, "r") as f:
         addition_text = f.read()
 
     resume_coro = ai_client.adaptating_resume(
-        vacanсy_text=vacanсy_text,
+        vacancy_text=vacancy_text,
         addition_text=addition_text,
-        resume_type=resume_type,
+        resume_type=args.resume_type,
         **kwargs,
     )
     cover_letter_coro = ai_client.adaptating_cover_letter(
-        vacanсy_text=vacanсy_text,
+        vacancy_text=vacancy_text,
         addition_text=addition_text,
-        resume_type=resume_type,
+        resume_type=args.resume_type,
         **kwargs,
     )
     resume, cover_letter = await asyncio.gather(resume_coro, cover_letter_coro, return_exceptions=True)
@@ -82,7 +78,7 @@ async def main():
     if isinstance(cover_letter, Exception):
         raise cover_letter
 
-    base_path = '/Users/ivanbazhenov/Library/Mobile Documents/com~apple~CloudDocs/Documents/Look a Job'
+    base_path = settings.output_dir
     base_folder_name = resume.company_name.replace(" ", "_").replace("/", "_").replace("-", "_").lower()
     folder_name = os.path.join(base_path, base_folder_name)
     counter = 2
@@ -107,7 +103,7 @@ async def main():
         company_name=resume.company_name,
     )
 
-    shutil.copy("vacancy.txt", os.path.join(folder_name, "vacancy.txt"))
+    shutil.copy(settings.vacancy_file, os.path.join(folder_name, "vacancy.txt"))
 
 
 asyncio.run(main())

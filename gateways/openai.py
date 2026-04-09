@@ -2,20 +2,14 @@ import json
 import logging
 
 from openai import AsyncOpenAI, OpenAIError, PermissionDeniedError
-
-from core.settings import settings
-from gateways.prompts import ADAPTING_RESUME, AU_RESUME, AU_COVER_LETTER
-from schemas import Resume, ResumeType
-import orjson
-from schemas import Resume
 from openai.types.shared.chat_model import ChatModel
 
+from core.settings import settings
+from gateways.prompts import AU_RESUME, AU_COVER_LETTER
+from schemas import Resume
+import orjson
 
 logger = logging.getLogger(__name__)
-
-
-ENGINEER_RESUME = "base_resume.json"
-SA_RESUME = "base_resume_sa.json"
 
 
 class AIClient:
@@ -28,18 +22,14 @@ class AIClient:
         self.use_cache = use_cache
 
     async def _chat_asc(self, prompt: str, text: str, model: ChatModel) -> str | None:
-        """Асинхронный метод для отправки запроса к OpenAI API и получения ответа.
-        """
         if self.use_cache:
             try:
                 with open("cache.json", "rb") as f:
                     result = orjson.loads(f.read())
                     if not result:
                         raise FileNotFoundError
-
                     return result
-
-            except FileNotFoundError as e:
+            except FileNotFoundError:
                 pass
 
         try:
@@ -73,15 +63,14 @@ class AIClient:
 
     async def adaptating_resume(
             self,
-            vacanсy_text: str,
+            vacancy_text: str,
             addition_text: str,
-            model: ChatModel = settings.ai_model,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer
+            model: ChatModel = settings.openai_model,
+            resume_type: str = settings.default_resume_type,
     ) -> Resume:
-        """Adopting resume to the given language."""
-
         print("Request resume adaptation")
-        with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
+        resume_path = settings.get_resume_path(resume_type)
+        with open(resume_path, "r") as f:
             base_resume = Resume.model_validate_json(f.read())
             base_resume_text = "My basic resume data: " + base_resume.model_dump_json()
 
@@ -91,7 +80,7 @@ class AIClient:
 
             prompt = AU_RESUME + base_resume_text + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         new_resume = Resume.model_validate_json(answer)
         resume = base_resume.model_copy()
         resume.company_name = new_resume.company_name
@@ -103,15 +92,14 @@ class AIClient:
 
     async def adaptating_cover_letter(
             self,
-            vacanсy_text: str,
+            vacancy_text: str,
             addition_text: str,
-            model: ChatModel = settings.ai_model,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer
+            model: ChatModel = settings.openai_model,
+            resume_type: str = settings.default_resume_type,
     ) -> str:
-        """Adopting resume to the given language."""
-
         print("Request cover_letter adaptation")
-        with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
+        resume_path = settings.get_resume_path(resume_type)
+        with open(resume_path, "r") as f:
             base_resume = "My basic resume data: " + f.read()
 
             additional_data = ''
@@ -120,7 +108,7 @@ class AIClient:
 
             prompt = AU_COVER_LETTER + base_resume + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         return json.loads(answer)['cover_letter']
 
 

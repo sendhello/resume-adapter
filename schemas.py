@@ -1,13 +1,4 @@
-from enum import StrEnum
-
 from pydantic import BaseModel
-from typing import List, Dict
-
-
-class ResumeType(StrEnum):
-    SoftwareEngineer = "software_engineer"
-    SistemAdministrator = "sistem_administrator"
-    RemoteSoftwareEngineer = "remote_software_engineer"
 
 
 class Education(BaseModel):

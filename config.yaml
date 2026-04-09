@@ -1,0 +1,24 @@
+personal:
+  name: "Ivan Bazhenov"
+  phone: "0466 284 180"
+  email: "bazhenov.in@gmail.com"
+  linkedin: "linkedin.com/in/sendhello"
+  github: "github.com/sendhello"
+  location: "Melbourne, VIC"
+  work_rights: "Onshore in Melbourne with current Australian work rights (Student visa, 48 hrs/fortnight; full-time available during study breaks). Available for contract, fixed-term, and part-time roles. Open to relocation within Australia."
+  sponsorship_note: "Eligible for Subclass 482 employer sponsorship."
+
+paths:
+  output_dir: "/Users/ivanbazhenov/Library/Mobile Documents/com~apple~CloudDocs/Documents/Look a Job"
+  vacancy_file: "vacancy.txt"
+
+ai:
+  default_provider: "openai"
+  openai_model: "gpt-5.2"
+  claude_model: "claude-opus-4-6"
+
+resume:
+  default_type: "engineer"
+  templates:
+    engineer: "resumes/base_resume.json"
+    sa: "resumes/base_resume_sa.json"

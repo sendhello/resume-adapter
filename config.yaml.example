@@ -1,0 +1,25 @@
+personal:
+  name: "Your Name"
+  phone: "0400 000 000"
+  email: "your.email@example.com"
+  linkedin: "linkedin.com/in/your-profile"
+  github: ""  # optional, leave empty if not applicable
+  location: "Melbourne, VIC"
+  work_rights: "Onshore in Melbourne with current Australian work rights."
+  sponsorship_note: ""  # optional, e.g. "Eligible for Subclass 482 employer sponsorship."
+
+paths:
+  output_dir: "./output"
+  vacancy_file: "vacancy.txt"
+
+ai:
+  default_provider: "openai"  # openai | claude
+  openai_model: "gpt-5.2"
+  claude_model: "claude-opus-4-6"
+
+resume:
+  default_type: "engineer"
+  templates:
+    engineer: "resumes/base_resume.json"
+    # Add more templates as needed:
+    # nurse: "resumes/base_resume_nurse.json"

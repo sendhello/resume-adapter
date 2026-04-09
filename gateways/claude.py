@@ -6,13 +6,10 @@ from anthropic import AsyncAnthropic
 
 from core.settings import settings
 from gateways.prompts import AU_RESUME, AU_COVER_LETTER
-from schemas import Resume, ResumeType
+from schemas import Resume
 import orjson
 
 logger = logging.getLogger(__name__)
-
-ENGINEER_RESUME = "base_resume.json"
-SA_RESUME = "base_resume_sa.json"
 
 
 class ClaudeAIClient:
@@ -58,7 +55,6 @@ class ClaudeAIClient:
         stripped = result.strip()
         if stripped.startswith("```"):
             lines = stripped.splitlines()
-            # Remove first and last fence lines
             inner = lines[1:-1] if lines[-1].strip() == "```" else lines[1:]
             result = "\n".join(inner)
 
@@ -69,16 +65,17 @@ class ClaudeAIClient:
 
     async def adaptating_resume(
             self,
-            vacanсy_text: str,
+            vacancy_text: str,
             addition_text: str,
             model: str = None,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer,
+            resume_type: str = settings.default_resume_type,
     ) -> Resume:
         if model is None:
             model = settings.claude_model
 
         print("Request resume adaptation (Claude)")
-        with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
+        resume_path = settings.get_resume_path(resume_type)
+        with open(resume_path, "r") as f:
             base_resume = Resume.model_validate_json(f.read())
             base_resume_text = "My basic resume data: " + base_resume.model_dump_json()
 
@@ -88,7 +85,7 @@ class ClaudeAIClient:
 
             prompt = AU_RESUME + base_resume_text + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         new_resume = Resume.model_validate_json(answer)
         resume = base_resume.model_copy()
         resume.company_name = new_resume.company_name
@@ -100,16 +97,17 @@ class ClaudeAIClient:
 
     async def adaptating_cover_letter(
             self,
-            vacanсy_text: str,
+            vacancy_text: str,
             addition_text: str,
             model: str = None,
-            resume_type: ResumeType = ResumeType.SoftwareEngineer,
+            resume_type: str = settings.default_resume_type,
     ) -> str:
         if model is None:
             model = settings.claude_model
 
         print("Request cover_letter adaptation (Claude)")
-        with open(SA_RESUME if resume_type == ResumeType.SistemAdministrator else ENGINEER_RESUME, "r") as f:
+        resume_path = settings.get_resume_path(resume_type)
+        with open(resume_path, "r") as f:
             base_resume = "My basic resume data: " + f.read()
 
             additional_data = ""
@@ -118,7 +116,7 @@ class ClaudeAIClient:
 
             prompt = AU_COVER_LETTER + base_resume + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacanсy_text, model=model)
+        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         return json.loads(answer)["cover_letter"]
 
 
