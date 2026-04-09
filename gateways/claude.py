@@ -5,7 +5,7 @@ import anthropic
 from anthropic import AsyncAnthropic
 
 from core.settings import settings
-from gateways.prompts import AU_RESUME, AU_COVER_LETTER
+from gateways.prompts import format_resume_prompt, format_cover_letter_prompt
 from schemas import Resume
 import orjson
 
@@ -83,7 +83,7 @@ class ClaudeAIClient:
             if addition_text.strip():
                 additional_data = "Additional information for the resume: " + addition_text
 
-            prompt = AU_RESUME + base_resume_text + additional_data
+            prompt = format_resume_prompt(settings) + base_resume_text + additional_data
 
         answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         new_resume = Resume.model_validate_json(answer)
@@ -114,7 +114,7 @@ class ClaudeAIClient:
             if addition_text.strip():
                 additional_data = "Additional information for the resume: " + addition_text
 
-            prompt = AU_COVER_LETTER + base_resume + additional_data
+            prompt = format_cover_letter_prompt(settings) + base_resume + additional_data
 
         answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
         return json.loads(answer)["cover_letter"]
