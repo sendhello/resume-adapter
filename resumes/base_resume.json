@@ -37,10 +37,7 @@
       "Elasticsearch/OpenSearch",
       "Microsoft SQL Server"
     ],
-    "Messaging & Streaming": [
-      "Apache Kafka",
-      "RabbitMQ"
-    ],
+    "Messaging & Streaming": ["Apache Kafka", "RabbitMQ"],
     "Cloud, Containers & DevOps": [
       "Docker",
       "Kubernetes",
@@ -50,15 +47,7 @@
       "Infrastructure automation (Ansible)",
       "Terraform (foundational)"
     ],
-    "AWS": [
-      "EC2",
-      "ECS",
-      "IAM",
-      "S3",
-      "RDS",
-      "VPC",
-      "Lambda"
-    ],
+    "AWS": ["EC2", "ECS", "IAM", "S3", "RDS", "VPC", "Lambda"],
     "Data Engineering & Analytics": [
       "ETL pipelines",
       "dbt",
@@ -168,12 +157,13 @@
       "description": "Multi-tenant order management microservice with JWT-based auth integration, FastAPI, PostgreSQL, Redis."
     },
     {
-      "name": "AI Resume Tailor",
-      "description": "Application that adapts resumes to job descriptions using OpenAI API, automating keyword matching and content restructuring."
+      "name": "Barsic3",
+      "url": "github.com/sendhello/Barsic3-api",
+      "description": "Enterprise reporting platform evolved over 8+ years from a console script to a full client-server application, actively used and maintained for Alexandrovsky Park Group. FastAPI backend with PostgreSQL, Redis, async SQLAlchemy, Google Sheets/Drive API integration, Yandex Disk backups, and Excel report generation. Telegram bot client (aiogram 3) with role-based access, dialog management, and Redis state persistence. Docker Compose deployment."
     },
     {
-      "name": "Translator Chat Bot",
-      "description": "AI-powered chatbot that breaks down text into words and expressions for language learning, storing vocabulary for spaced repetition study."
+      "name": "AI Resume Tailor",
+      "description": "Application that adapts resumes to job descriptions using OpenAI API, automating keyword matching and content restructuring."
     }
   ],
   "education": [
@@ -228,14 +218,7 @@
       "qualification": "Diploma Informatics"
     }
   ],
-  "languages": [
-    "English, Professional working proficiency",
-    "Russian, Fluent"
-  ],
-  "hobbies": [
-    "Cycling",
-    "Tennis",
-    "Hiking"
-  ],
+  "languages": ["English, Professional working proficiency", "Russian, Fluent"],
+  "hobbies": ["Cycling", "Tennis", "Hiking"],
   "work_rights": "Onshore in Melbourne with current Australian work rights (Student visa, 48 hrs/fortnight; full-time available during study breaks). Available for contract, fixed-term, and part-time roles. Open to relocation within Australia."
 }

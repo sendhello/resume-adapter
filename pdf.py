@@ -249,6 +249,17 @@ def build_resume(path: str, title: str, resume: Resume):
         else:
             flow.append(Paragraph(f"<b>{group}:</b> {', '.join(skills)}", styles["BodySkils"]))
 
+    if resume.personal_projects:
+        flow.append(Paragraph("PERSONAL PROJECTS", styles["H3"]))
+        flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
+        for project in resume.personal_projects:
+            if project.url:
+                flow.append(Paragraph(f"<b>{project.name}</b> — {project.url}", styles["BodySkils"]))
+            else:
+                flow.append(Paragraph(f"<b>{project.name}</b>", styles["BodySkils"]))
+            flow.append(Paragraph(project.description, styles["BodyList"]))
+            flow.append(Paragraph("", styles["BodyList"]))
+
     flow.append(Paragraph("PROFESSIONAL  SUMMARY", styles["H3"]))
     flow.append(HRFlowable(width="100%", thickness=0.5, color=colors.black, spaceBefore=0, spaceAfter=6))
     flow.append(Paragraph(resume.professional_summary, styles["Body"]))

@@ -1,1 +1,60 @@
- base resume
+Company logo for, Talent.
+Talent
+
+
+Python Developer 
+Melbourne, Victoria, Australia · 18 hours ago · 16 people clicked apply
+Promoted by hirer · Responses managed off LinkedIn
+
+Contract
+
+Apply
+
+Save
+Use AI to assess how you fit
+Get AI-powered advice on this job and more exclusive features with Premium. Reactivate Premium
+
+
+Show match details
+
+Tailor my resume
+
+Help me stand out
+People you can reach out to
+
+School alumni from Torrens University Australia
+Show all
+About the job
+Our client is currently seeking experienced Python Developer to support a federal government program delivering a complex data management system used across international partners. This role will focus on the ongoing development, enhancement, and support of a web-based platform managing meteorological and ocean data.
+
+You will work within a collaborative team environment, contributing to system development, cloud deployment, technical documentation, and stakeholder engagement across both local and international users.
+
+Accountabilities And Responsibilities
+
+Design, develop, and maintain a web-based data management system across the full stack
+Manage the end-to-end software development lifecycle, including design, build, testing, deployment, and support
+Work with technologies including Python, PostgreSQL, JavaScript, and PHP
+Support deployment and maintenance across on-premise and AWS cloud environments
+Develop and maintain technical documentation and training materials
+Deliver training and provide support to technical and non-technical users
+Collaborate with internal teams and international stakeholders to enhance system capabilities
+Support data ingestion, validation, and quality assurance processes
+
+Skills And Experience We Are Looking For
+
+Strong experience as a Full-Stack Developer within web-based application environments
+Proficiency in Linux (Ubuntu), PostgreSQL, Python, HTML/PHP, and JavaScript
+Experience working with cloud platforms, particularly AWS
+Experience across the full software development lifecycle in complex environments
+Strong problem-solving skills and ability to work autonomously
+Excellent communication skills with the ability to engage with a broad range of stakeholders
+Must be an Australian Citizen to be considered.
+
+Highly Regarded
+
+Experience working with data-intensive systems or scientific/environmental datasets
+Experience developing training materials and delivering technical training
+Exposure to government or international program environments
+Willingness and ability to undertake short-term international travel
+
+If you would like to know more, please contact Milly Kerei-Keepa on 0476865411/milly.kerei-keepa@talentinternational.com or hit Apply Now

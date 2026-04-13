@@ -16,6 +16,12 @@ class Experience(BaseModel):
     achievements: list[str]
 
 
+class PersonalProject(BaseModel):
+    name: str
+    url: str = ""
+    description: str
+
+
 class Resume(BaseModel):
     company_name: str
     name: str
@@ -29,6 +35,7 @@ class Resume(BaseModel):
     key_skills: dict[str, list[str]]
     work_experience: list[Experience]
     education: list[Education]
+    personal_projects: list[PersonalProject] = []
     other_educations: list[Education] = []
     languages: list[str] = []
     hobbies: list[str] = []

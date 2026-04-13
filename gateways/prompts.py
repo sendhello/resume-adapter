@@ -36,14 +36,38 @@ Work rights field:
 Writing style:
 - Achievement-focused: "Reduced X by Y% by doing Z" not "Responsible for managing Z".
 - Direct and specific. No filler words, no promotional language.
-- Avoid AI-sounding phrases: "pivotal", "crucial", "landscape", "fostering", "showcasing", "commitment to", "serves as", "testament to".
-- Do not end bullet points with vague "-ing" phrases (e.g., "...enhancing team productivity").
 - Use standard hyphen "-" only. No en-dash or em-dash.
 - No tables, icons, or images. ATS-friendly plain text.
 
+Anti-AI writing rules (CRITICAL - follow every one):
+- BANNED words/phrases: pivotal, crucial, landscape, fostering, showcasing, commitment to, serves as, stands as, testament to, underscores, highlights, enduring, vibrant, rich (figurative), profound, nestled, groundbreaking, renowned, delve, tapestry, interplay, intricate, garner, encompassing, cultivating, leveraging, spearheading.
+- No "-ing" phrase endings on bullet points (e.g., "...enhancing team productivity", "...ensuring quality", "...contributing to growth"). End with the concrete result instead.
+- Use "is/are/has" instead of "serves as/stands as/functions as/boasts/features".
+- No rule-of-three patterns ("X, Y, and Z" repeated across bullets). Vary grouping sizes.
+- No negative parallelisms ("Not only X but also Y", "It's not just X, it's Y").
+- No false ranges ("from X to Y, from A to B").
+- No filler: "In order to" -> "To", "Due to the fact that" -> "Because", "It is important to note that" -> cut it.
+- No significance inflation: don't say something is "significant" or "critical" - let the metrics speak.
+- Vary sentence length and structure. Don't make every bullet the same rhythm.
+- Use straight quotes, not curly quotes.
+- Do not uniformly hyphenate common compounds (cross-functional, data-driven, end-to-end, high-quality). Humans are inconsistent with these.
+
+Merge rules - CRITICAL:
+From the base resume, ONLY replace these fields:
+- "company_name" - set to the company name from the job description
+- "title" - set to the job title from the job description
+- "professional_summary" - rewritten for this role
+- "key_skills" - reordered and sharpened for this role
+- "work_experience" - achievements rewritten and reordered for this role
+- "personal_projects" - copy from base resume (max 3 points); include only projects relevant to this role, drop irrelevant ones
+- "work_rights" - usually copy from base resume, but if job ad mentions sponsorship and candidate has a sponsorship note, append it here.
+
+All other fields MUST be copied exactly from the base resume:
+- "name", "phone", "email", "linkedin", "github", "address"
+- "education", "other_educations", "languages", "hobbies"
+
 Output format:
-JSON object matching the structure of the base resume data, with all fields adapted.
-Set "company_name" to the company name from the job description.
+JSON object matching the structure of the base resume data.
 """
 
 AU_COVER_LETTER = """
@@ -71,12 +95,23 @@ What NOT to include:
 - No promotional language ("groundbreaking", "vibrant", "innovative leader")
 
 Writing style:
-- Professional, direct, human-sounding.
-- Vary sentence length. Short statements mixed with longer ones.
-- Write like a competent professional talking to another professional, not like a template.
-- Avoid dangling "-ing" phrases, rule-of-three patterns, and vague claims.
-- Use "is/are/did" instead of "serves as/functions as/stands as".
-- No em-dashes or en-dashes. Use standard hyphen "-" only where needed.
+- Professional, direct, human-sounding. Write like a competent professional talking to another professional, not like a template.
+- Vary sentence length. Short punchy sentences mixed with longer ones. Don't make every paragraph the same length.
+- Use standard hyphen "-" only. No em-dash or en-dash.
+
+Anti-AI writing rules (CRITICAL - follow every one):
+- BANNED words/phrases: pivotal, crucial, landscape, fostering, showcasing, commitment to, serves as, stands as, testament to, underscores, highlights, enduring, vibrant, rich (figurative), profound, nestled, groundbreaking, renowned, delve, tapestry, interplay, intricate, garner, encompassing, cultivating, leveraging, spearheading.
+- No "-ing" phrase endings ("...contributing to the team's success", "...ensuring quality delivery"). End with the result.
+- Use "is/are/has/did" instead of "serves as/stands as/functions as".
+- No rule-of-three patterns. Don't force ideas into groups of three.
+- No negative parallelisms ("Not only X but also Y", "It's not just about X, it's about Y").
+- No significance inflation: don't call things "significant" or "critical" - be specific instead.
+- No filler: "In order to" -> "To", "Due to the fact that" -> "Because", "It is important to note" -> cut it.
+- No generic positive conclusions ("I look forward to bringing my expertise...", "excited about the opportunity").
+- No sycophantic tone ("I would be thrilled", "I am passionate about").
+- Have a voice. Real people have opinions and specific reactions. "I genuinely enjoy complex business rules and data accuracy requirements" beats "I am passionate about delivering excellence".
+- Use straight quotes, not curly quotes.
+- Do not uniformly hyphenate common compounds (cross-functional, data-driven, end-to-end). Humans are inconsistent with these.
 
 Output format:
 JSON object with a single field:

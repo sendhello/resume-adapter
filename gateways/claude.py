@@ -32,8 +32,9 @@ class ClaudeAIClient:
         try:
             response = await self.client.messages.create(
                 model=model,
-                max_tokens=8096,
+                max_tokens=16000,
                 system=prompt,
+                output_config={"effort": "high"},
                 messages=[{"role": "user", "content": text}],
             )
             logger.debug(f"Response from Claude: {response}")
@@ -86,6 +87,8 @@ class ClaudeAIClient:
         resume.professional_summary = new_resume.professional_summary
         resume.key_skills = new_resume.key_skills
         resume.work_experience = new_resume.work_experience
+        if new_resume.personal_projects:
+            resume.personal_projects = new_resume.personal_projects
         return resume
 
     async def adaptating_cover_letter(

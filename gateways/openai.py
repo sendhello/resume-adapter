@@ -80,6 +80,8 @@ class AIClient:
         resume.professional_summary = new_resume.professional_summary
         resume.key_skills = new_resume.key_skills
         resume.work_experience = new_resume.work_experience
+        if new_resume.personal_projects:
+            resume.personal_projects = new_resume.personal_projects
         return resume
 
     async def adaptating_cover_letter(
