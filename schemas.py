@@ -40,3 +40,7 @@ class Resume(BaseModel):
     languages: list[str] = []
     hobbies: list[str] = []
     work_rights: str = ""
+
+
+class CoverLetter(BaseModel):
+    cover_letter: str

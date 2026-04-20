@@ -1,15 +1,18 @@
-import json
 import logging
+from typing import TypeVar
 
 import anthropic
 from anthropic import AsyncAnthropic
+from pydantic import BaseModel
 
 from core.cache import read_cache, write_cache
 from core.settings import settings
 from gateways.prompts import format_resume_prompt, format_cover_letter_prompt
-from schemas import Resume
+from schemas import CoverLetter, Resume
 
 logger = logging.getLogger(__name__)
+
+T = TypeVar("T", bound=BaseModel)
 
 
 class ClaudeAIClient:
@@ -19,21 +22,28 @@ class ClaudeAIClient:
         )
         self.use_cache = use_cache
 
-    async def _chat_asc(self, prompt: str, text: str, model: str) -> str | None:
+    async def _chat_asc(
+        self,
+        prompt: str,
+        text: str,
+        model: str,
+        output_format: type[T],
+    ) -> T | None:
         if self.use_cache:
             cached = read_cache(prompt, text)
             if cached is not None:
-                return cached
+                return output_format.model_validate_json(cached)
 
         if not text or not text.strip():
             logger.error("Cannot send empty user message to Claude API")
             return None
 
         try:
-            response = await self.client.messages.create(
+            response = await self.client.messages.parse(
                 model=model,
                 max_tokens=16000,
                 system=prompt,
+                output_format=output_format,
                 output_config={"effort": "high"},
                 messages=[{"role": "user", "content": text}],
             )
@@ -45,17 +55,13 @@ class ClaudeAIClient:
             logger.error(f"Error in Claude chat completion: {e}")
             return None
 
-        result = response.content[0].text
+        parsed: T | None = response.parsed_output
+        if parsed is None:
+            logger.error("Claude returned no parsed_output")
+            return None
 
-        # Strip markdown code fences if Claude wraps JSON in ```json ... ```
-        stripped = result.strip()
-        if stripped.startswith("```"):
-            lines = stripped.splitlines()
-            inner = lines[1:-1] if lines[-1].strip() == "```" else lines[1:]
-            result = "\n".join(inner)
-
-        write_cache(prompt, text, result)
-        return result
+        write_cache(prompt, text, parsed.model_dump_json())
+        return parsed
 
     async def adaptating_resume(
             self,
@@ -79,8 +85,12 @@ class ClaudeAIClient:
 
             prompt = format_resume_prompt(settings) + base_resume_text + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
-        new_resume = Resume.model_validate_json(answer)
+        new_resume = await self._chat_asc(
+            prompt=prompt,
+            text=vacancy_text,
+            model=model,
+            output_format=Resume,
+        )
         resume = base_resume.model_copy()
         resume.company_name = new_resume.company_name
         resume.title = new_resume.title
@@ -112,8 +122,13 @@ class ClaudeAIClient:
 
             prompt = format_cover_letter_prompt(settings) + base_resume + additional_data
 
-        answer = await self._chat_asc(prompt=prompt, text=vacancy_text, model=model)
-        return json.loads(answer)["cover_letter"]
+        parsed = await self._chat_asc(
+            prompt=prompt,
+            text=vacancy_text,
+            model=model,
+            output_format=CoverLetter,
+        )
+        return parsed.cover_letter
 
 
 def get_claude_client(use_cache: bool = False) -> ClaudeAIClient:
