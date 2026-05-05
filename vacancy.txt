@@ -1,1 +1,81 @@
----
+Company logo for, Reserve Bank of Australia.
+Reserve Bank of Australia
+
+
+Lead AI Engineer 
+Sydney, New South Wales, Australia · 2 days ago · 41 people clicked apply
+Promoted by hirer · Responses managed off LinkedIn
+
+Hybrid
+
+Contract
+
+Apply
+
+Save
+Use AI to assess how you fit
+Get AI-powered advice on this job and more exclusive features with Premium. Reactivate Premium
+
+
+Show match details
+
+Tailor my resume
+
+Help me stand out
+People you can reach out to
+
+Prabudith Dissanayake
+• 3rd
+Reserve Bank of Australia
+School alum from Torrens University Australia
+Message
+About the job
+Lead hands‑on AI engineering and shape how AI is safely scaled across the RBA
+Fixed‑term contract in a highly visible Innovation Lab role, until 31 Aug 2027
+Play a critical role in shaping the future of AI at one of Australia's most trusted financial institutions
+Own the technical direction and delivery of enterprise‑grade AI solutions, turning experimentation into trusted, real‑world impact
+
+About the business/role/team
+
+This role is part of the Innovation Lab, the Bank's hub for emerging technologies and future-focused solutions. The Lab is responsible for delivering the Bank's AI strategy by exploring and implementing advanced technologies to drive innovation and organisational efficiency.
+ 
+
+As a Lead AI Engineer, you will report to the Innovation Lab manager. You will work closely with a multidisciplinary team of data scientists, software engineers, product managers, and governance specialists. The team designs, prototypes, and scales AI-powered applications across the Bank, focusing on responsible AI, security, and integration into enterprise systems.
+ 
+
+You will be part of a collaborative, agile environment that values experimentation, continuous learning, and real-world impact. This role will help shape the future of AI within one of Australia's most trusted financial institutions.
+
+About the role
+
+As a Lead AI Engineer, you will:
+
+Lead the design, development, and delivery of AI‑powered applications and agents using MS AI Foundry, Cloudera AI and other approved platforms
+Take ownership of AI solution architecture, guiding prototypes through to reliable, enterprise‑grade deployments
+Build and review production‑quality code, with a strong emphasis on Python and cloud‑native engineering practices
+Design and implement LLM‑powered workflows, including retrieval patterns, orchestration, and evaluation
+Establish and uphold engineering best practices, including testing, validation, monitoring, and documentation
+Collaborate closely with product owners and cross‑functional teams to refine requirements and define delivery outcomes
+Ensure AI solutions align with internal governance, risk, and responsible AI standards
+
+About You
+
+You will bring:
+
+Strong hands‑on experience designing and delivering AI‑enabled systems in production environments
+Advanced programming skills in Python, with experience in C# and/or R regarded as highly desirable
+Proven experience with Azure AI services and cloud‑native development approaches
+Solid understanding of LLMs, AI evaluation techniques, and scaling AI solutions safely and reliably
+Experience leading or guiding engineers, setting technical direction, and mentoring others
+Familiarity with CI/CD pipelines, ModelOps practices, and operationalising AI solutions
+Awareness of AI risk, governance, and compliance requirements in regulated environments
+Confidence working in ambiguity and collaborating across technical and non‑technical teams
+
+Be More
+
+Working for an organisation that truly makes a difference to the people of Australia, we can offer development and career opportunities in a collaborative environment that supports your growth, wellbeing and promotes flexibility. Your individual growth and success drives the RBA forward as an organisation. Be more means you can do more, for yourself and for Australia.
+
+Why RBA?
+
+The RBA makes an important contribution to the Australian economy through the pursuit of national economic policy objectives and associated activities in financial markets and banking. We also issue Australia's banknotes and operate infrastructure critical to the payments system, all of which contribute to the welfare of the Australian people. Made up of specialists across a wide range of fields, our people, values, and culture play a critical role in achieving our objectives. Striving to be Open & Dynamic, we consider and incorporate different perspectives, work across teams and are transparent with each other, whilst delivering quality together effectively and focusing on outcomes by prioritising, testing, learning, and refining as we go. Our people conduct themselves with a high degree of integrity, while striving for excellence in the work they perform and the outcomes they achieve. We encourage intelligent inquiry and we treat one another with respect while promoting the public interest through our efforts. We know it is the growth and success of our people that drives the RBA forward. Come and make a bigger contribution while you build and develop your own skills too, because being more means you can do more, for yourself and for Australia.
+
+The Reserve Bank of Australia is committed to equity, diversity and inclusion through key initiatives. We welcome and encourage applicants from diverse backgrounds to apply, including Aboriginal and Torres Strait Islander peoples, culturally and linguistically diverse background, those living with a disability and from the LGBTQ+ community. We are committed to making the recruitment process fair and equitable for all our candidates.

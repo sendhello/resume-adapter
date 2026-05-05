@@ -17,8 +17,7 @@
       "AsyncIO",
       "Pydantic",
       "RESTful API",
-      "pytest",
-      "OpenAI API"
+      "pytest"
     ],
     "Distributed Systems & Architecture": [
       "Microservices architecture",
@@ -53,7 +52,8 @@
       "dbt",
       "Apache Airflow",
       "Apache Spark",
-      "PySpark"
+      "PySpark",
+      "Superset"
     ],
     "Observability & Reliability": [
       "Structured logging",
@@ -71,6 +71,16 @@
       "Performance tuning and SQL optimisation",
       "Secure-by-design system development",
       "Security audit logging (SIEM/CEF)"
+    ],
+    "LLM Integration": [
+      "OpenAI API",
+      "Anthropic Claude API",
+      "tool use",
+      "streaming",
+      "few-shot",
+      "chain-of-thought",
+      "prompt caching",
+      "structured outputs via JSON Schema + Pydantic"
     ]
   },
   "work_experience": [
